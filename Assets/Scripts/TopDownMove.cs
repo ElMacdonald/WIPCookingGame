@@ -9,19 +9,19 @@ public class TopDownMove : MonoBehaviour
     public float speed;
     public float rotationSpeed;
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
+        //gets input
         vertical = Input.GetAxisRaw("Vertical");
         horizontal = Input.GetAxisRaw("Horizontal");
+
+        //creates movement vector
         move = new Vector3(horizontal, 0, vertical).normalized;
 
+        //applies vector
         transform.position += speed * Time.deltaTime * move;
 
+        //rotates player to face move direction
         if (move != Vector3.zero)
         {
             Quaternion targetRotation = Quaternion.LookRotation(move);
