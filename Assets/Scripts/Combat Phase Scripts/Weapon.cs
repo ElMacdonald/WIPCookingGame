@@ -1,12 +1,10 @@
 using UnityEngine;
-using UnityEngine.System.Collections;
+using System.Collections;
 
 public class Weapon : MonoBehaviour
 {
-    [Header("Weapon Stats")]
     public int dmg;
     public float firerate;
-    public float firerateTimer;
     public float range;
     public float reloadTime;
     public int magSize;
@@ -16,10 +14,9 @@ public class Weapon : MonoBehaviour
 
     [Header("Sound Effects")]
     public AudioSource[] audios;
-    private bool reloadInProgress;
-
-
-
+    
+    public bool reloadInProgress;
+    public float firerateTimer;
 
     void Start()
     {
@@ -33,10 +30,13 @@ public class Weapon : MonoBehaviour
     }
 
     //Sends out a raycast and damages other player, overrideable by unconventional weapons
-    private void Fire()
+    public void Fire()
     {
+        Debug.Log("Firing");
         if (curMag > 0)
         {
+            curMag--;
+            firerateTimer = 0;
             if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hit, range))
             {
                 Debug.Log("Hit " + hit.transform.name);
@@ -45,9 +45,11 @@ public class Weapon : MonoBehaviour
     }
 
     //reloads the weapon
-    private IEnumerator Reload()
+    public IEnumerator Reload()
     {
+        Debug.Log("beginning wait");
         yield return new WaitForSeconds(reloadTime);
+        Debug.Log("wait over"); 
         int neededAmmo = magSize - curMag;
 
         if (reserveAmmo >= neededAmmo)
@@ -86,7 +88,7 @@ public class Weapon : MonoBehaviour
     private void InputManager()
     {
         //Shooting
-        if (Input.GetAxis("Fire1") != 0 && firerate > firerateTimer)
+        if (Input.GetAxis("Fire1") != 0 && firerate < firerateTimer)
         {
             Fire();
         }
@@ -94,8 +96,9 @@ public class Weapon : MonoBehaviour
         //Reloading
         if (Input.GetKeyDown(KeyCode.R) && !reloadInProgress)
         {
+            StartCoroutine(Reload());
+            Debug.Log("Reloading");
             reloadInProgress = true;
-            Reload();
         }
     }
 }
