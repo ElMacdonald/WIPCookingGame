@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: metal 5
+  m_Name: sight 1
   m_Shader: {fileID: 4800000, guid: 313fcf3aebc04cf4ab4f8c5f2850be7f, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -30,12 +30,12 @@ Material:
     m_Ints: []
     m_Floats:
     - Step1: 1
-    - _Gloss: 10
-    - _OutlineWidth: 0.003
+    - _Gloss: 5.37
+    - _OutlineWidth: 0.005
     - _RimPower: 2.2
-    - _RimStep: 0
+    - _RimStep: 0.675
     - _RimStepSmooth: 0
-    - _ShadowStep: 0.565
+    - _ShadowStep: 0.875
     - _ShadowStepSmooth: 0
     - _SpecularStep: 1
     - _SpecularStepSmooth: 0
@@ -45,10 +45,10 @@ Material:
     - _Step3: 0.97
     - _Step4: 0.025
     m_Colors:
-    - _BaseColor: {r: 0.6132076, g: 0.6132076, b: 0.6132076, a: 1}
-    - _HighColor: {r: 1, g: 1, b: 1, a: 1}
-    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
-    - _RimColor: {r: 1, g: 1, b: 1, a: 1}
-    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0.35878474, g: 0.4245283, b: 0.3504361, a: 1}
+    - _HighColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OutlineColor: {r: 0.032840863, g: 0.16981131, b: 0.04937958, a: 1}
+    - _RimColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecularColor: {r: 0.28276354, g: 0.8773585, b: 0.09518514, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
