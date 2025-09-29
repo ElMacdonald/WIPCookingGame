@@ -40,6 +40,11 @@ public class Weapon : MonoBehaviour
             if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hit, range))
             {
                 Debug.Log("Hit " + hit.transform.name);
+                Health target = hit.transform.GetComponent<Health>();
+                if (target != null)
+                {
+                    target.takeDamage(dmg);
+                }
             }
         }
     }
@@ -81,7 +86,7 @@ public class Weapon : MonoBehaviour
     //Shakes camera for enhanced gunplay feel
     private void CamShake()
     {
-
+        cam.GetComponent<CameraShake>().Shake();
     }
 
     //handles input from player
@@ -91,6 +96,7 @@ public class Weapon : MonoBehaviour
         if (Input.GetAxis("Fire1") != 0 && firerate < firerateTimer)
         {
             Fire();
+            CamShake();
         }
 
         //Reloading
