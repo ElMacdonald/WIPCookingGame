@@ -1,9 +1,14 @@
 using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
-public class IngredientHolding : MonoBehaviour
+public class CookingStation : MonoBehaviour
 {
-    public Ingredient ingredientCurrentlyHeld;
+    public List<Ingredient> ingredientsInStation = new List<Ingredient>();
+
+    public int maxIngredients;
+    public Transform[] ingredientPositions;
+    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

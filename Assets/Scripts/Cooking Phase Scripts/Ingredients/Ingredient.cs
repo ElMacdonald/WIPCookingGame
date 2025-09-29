@@ -4,10 +4,10 @@ using System.Collections;
 public class Ingredient
 {
     public string name;
-    public int quality;
+    public string quality;
     public GameObject ingredientPrefab;
 
-    public Ingredient(string name, int quality)
+    public Ingredient(string name, string quality)
     {
         this.name = name;
         this.quality = quality;

@@ -9,7 +9,7 @@ public class TopDownMove : MonoBehaviour
     public float speed;
     public float rotationSpeed;
 
-    void Update()
+    void FixedUpdate()
     {
         //gets input
         vertical = Input.GetAxisRaw("Vertical");
