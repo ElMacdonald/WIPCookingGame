@@ -8,12 +8,13 @@ public class IngredientBin : MonoBehaviour
     public float ingredientCooldown;
     private float cdTimer;
 
+    public GameObject ingredientModel;
     public bool usable;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        ingredientType = new Ingredient(ingredientName, "Normal");
+        ingredientType = new Ingredient(ingredientName, "Normal", ingredientModel);
         cdTimer = 0;
         usable = true;
     }
@@ -44,7 +45,7 @@ public class IngredientBin : MonoBehaviour
         if (ih != null && ih.ingredientCurrentlyHeld == null && usable)
         {
             updateQuality();
-            ih.ingredientCurrentlyHeld = new Ingredient(ingredientType.name, ingredientType.quality);
+            ih.ingredientCurrentlyHeld = new Ingredient(ingredientType.name, ingredientType.quality, ingredientType.ingredientPrefab);
             ih.isHeld = true;
             ih.makeFollowable(ingredientType.name);
             cdTimer = ingredientCooldown;

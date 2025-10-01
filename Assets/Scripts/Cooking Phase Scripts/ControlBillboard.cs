@@ -20,7 +20,7 @@ public class ControlBillboard : MonoBehaviour
     {
         target.position = player.position + new Vector3(0, 2, 0);
         target.LookAt(target.position + cam.forward);
-        if(ie.canInteract || ie.canTrash)
+        if(ie.canInteract || ie.canTrash || ie.canCook)
         {
             gameObject.GetComponent<MeshRenderer>().enabled = true;
         }

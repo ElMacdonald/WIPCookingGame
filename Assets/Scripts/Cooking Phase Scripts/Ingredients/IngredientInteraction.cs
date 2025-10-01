@@ -20,17 +20,35 @@ public class IngredientInteraction : MonoBehaviour
             {
                 gameObject.GetComponent<IngredientHolding>().trashIngredient();
             }
+            else if (canCook)
+            {
+                GameObject cookingStation = GameObject.FindGameObjectWithTag("Cooking Station");
+                if (cookingStation != null)
+                {
+                    CookingStation cs = cookingStation.GetComponent<CookingStation>();
+                    if (cs != null)
+                    {
+                        IngredientHolding ih = gameObject.GetComponent<IngredientHolding>();
+                        if (ih != null && ih.ingredientCurrentlyHeld != null)
+                        {
+                            cs.AddIngredient(ih.ingredientCurrentlyHeld);
+                            ih.trashIngredient();
+                        }
+                        cs.cookIngredients();
+                    }
+                }
+            }
             else
             {
                 GameObject closestBin = GetClosestBin();
-            if (closestBin != null)
-            {
-                IngredientBin ib = closestBin.GetComponent<IngredientBin>();
-                if (ib != null)
+                if (closestBin != null)
                 {
-                    ib.giveIngredient(this.gameObject);
+                    IngredientBin ib = closestBin.GetComponent<IngredientBin>();
+                    if (ib != null)
+                    {
+                        ib.giveIngredient(this.gameObject);
+                    }
                 }
-            }
             }
         }
     }
