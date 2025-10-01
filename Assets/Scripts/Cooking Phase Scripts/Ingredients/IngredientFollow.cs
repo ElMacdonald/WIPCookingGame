@@ -19,7 +19,7 @@ public class IngredientFollow : MonoBehaviour
     {
         if (ih.isHeld && ih.ingredientCurrentlyHeld != null)
         {
-            this.transform.position = player.position + player.forward + new Vector3(0, 1, 0);
+            this.transform.position = player.position + player.forward + new Vector3(0, -0.2f, 0);
             this.transform.rotation = player.rotation;
         }
     }

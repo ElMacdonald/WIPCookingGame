@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ingredient
   - Trash
+  - Cooking Station
   layers:
   - Default
   - TransparentFX

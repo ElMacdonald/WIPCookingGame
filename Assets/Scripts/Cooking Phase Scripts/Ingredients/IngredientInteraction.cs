@@ -7,16 +7,14 @@ public class IngredientInteraction : MonoBehaviour
     public List<GameObject> usableBins = new List<GameObject>();
     public bool canInteract;
     public bool canTrash;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
+    public bool canCook;
 
-    }
-
-    // Update is called once per frame
+    // Checks for input from user and verifies if they're able to interact with ingredient bins or trash
+    // If they are, it will either trash the ingredient they're holding or deposit it into the closest bin
+    // If there are multiple bins in range, it will deposit it into the closest one
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && (canInteract || canTrash))
+        if (Input.GetKeyDown(KeyCode.E) && (canInteract || canTrash || canCook))
         {
             if (canTrash)
             {
@@ -24,7 +22,7 @@ public class IngredientInteraction : MonoBehaviour
             }
             else
             {
-                GameObject closestBin = getClosestBin();
+                GameObject closestBin = GetClosestBin();
             if (closestBin != null)
             {
                 IngredientBin ib = closestBin.GetComponent<IngredientBin>();
@@ -37,7 +35,8 @@ public class IngredientInteraction : MonoBehaviour
         }
     }
 
-    GameObject getClosestBin()
+    // Finds the closest ingredient bin to the player
+    GameObject GetClosestBin()
     {
         GameObject closest = null;
         float closestDist = Mathf.Infinity;
@@ -58,6 +57,7 @@ public class IngredientInteraction : MonoBehaviour
     }
 
 
+    // Used for detecting if the player is in range of an ingredient bin
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Ingredient")
@@ -75,8 +75,14 @@ public class IngredientInteraction : MonoBehaviour
         {
             canTrash = true;
         }
+
+        if (other.gameObject.tag == "Cooking Station")
+        {
+            canCook = true;
+        }
     }
 
+    // Used whenever player leaves the trigger area of bins and stations
     void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Ingredient")
@@ -89,10 +95,15 @@ public class IngredientInteraction : MonoBehaviour
                 canInteract = false;
             }
         }
-        
+
         if (other.gameObject.tag == "Trash")
         {
             canTrash = false;
+        }
+        
+        if(other.gameObject.tag == "Cooking Station")
+        {
+            canCook = false;
         }
     }
 }
