@@ -10,7 +10,6 @@ public class QTEVisuals : MonoBehaviour
     public float timeToPress;
     private float fillRatio;
     private float currentSize;
-    private float minSize=0;
     private float maxSize=300;
 
     public RectTransform bar;

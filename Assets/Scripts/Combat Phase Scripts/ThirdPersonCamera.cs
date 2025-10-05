@@ -25,6 +25,10 @@ public class ThirdPersonCamera : MonoBehaviour
     private Transform camTransform;
     private float yaw;
     private float pitch;
+    public int playerNum;
+
+    private float xAxis;
+    private float yAxis;
 
     void Start()
     {
@@ -48,17 +52,26 @@ public class ThirdPersonCamera : MonoBehaviour
         if (target == null) return;
 
         //Mouse input using Unity's old input manager
-        yaw += Input.GetAxis("Mouse X") * mouseSensitivityX;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivityY;
+
+        if (playerNum == 1)
+        {
+            xAxis = Input.GetAxis("LookX_P1");
+            yAxis = Input.GetAxis("LookY_P1");
+        }
+        else
+        {
+            xAxis = Input.GetAxis("LookX_P2");
+            yAxis = Input.GetAxis("LookY_P2");
+        }
+
+        yaw += xAxis * mouseSensitivityX;
+        float mouseY = yAxis * mouseSensitivityY;
         pitch += (invertY ? mouseY : -mouseY);
         pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
 
         //Zoom with scroll wheel (not used for this game, but left for testing)
-        float scroll = Input.GetAxis("Mouse ScrollWheel");
-        if (Mathf.Abs(scroll) > 0.0001f)
-        {
-            distance = Mathf.Clamp(distance - scroll * scrollSensitivity, minDistance, maxDistance);
-        }
+
+        distance = Mathf.Clamp(distance, minDistance, maxDistance);
 
         //Build rotation from yaw/pitch
         Quaternion camRotation = Quaternion.Euler(pitch, yaw, 0f);

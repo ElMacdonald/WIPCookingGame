@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 230303294}
   - component: {fileID: 230303297}
   - component: {fileID: 230303298}
+  - component: {fileID: 230303299}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -284,6 +285,22 @@ MonoBehaviour:
   scrollSensitivity: 0
   minDistance: 3
   maxDistance: 3
+  playerNum: 1
+--- !u!114 &230303299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230303293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1db2292fab80284e815142149dccc8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraShake
+  shakeDuration: 0.1
+  shakeMagnitude: 0.1
+  camTransform: {fileID: 230303296}
 --- !u!1 &361760618
 GameObject:
   m_ObjectHideFlags: 0
@@ -754,6 +771,7 @@ MonoBehaviour:
   jumpHeight: 1.6
   terminalVelocity: -50
   cameraTransform: {fileID: 0}
+  playerNum: 1
 --- !u!1 &703069837
 GameObject:
   m_ObjectHideFlags: 0
@@ -783,7 +801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b85cb98de9d6a924985083ff95dddf00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
-  dmg: 3
+  dmg: 15
   firerate: 0.4
   range: 10
   reloadTime: 2
@@ -793,6 +811,7 @@ MonoBehaviour:
   audios: []
   reloadInProgress: 0
   firerateTimer: 0
+  playerNum: 1
 --- !u!4 &703069839
 Transform:
   m_ObjectHideFlags: 0
@@ -1067,6 +1086,7 @@ GameObject:
   - component: {fileID: 1657273844}
   - component: {fileID: 1657273843}
   - component: {fileID: 1657273842}
+  - component: {fileID: 1657273846}
   m_Layer: 0
   m_Name: EX target
   m_TagString: Untagged
@@ -1166,6 +1186,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1657273846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1657273841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fa8a4f1efbb43f488d39e02b73a7c79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+  maxHealth: 100
+  curHealth: 0
+  isDead: 0
 --- !u!1 &1850673452
 GameObject:
   m_ObjectHideFlags: 0

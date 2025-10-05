@@ -26,6 +26,13 @@ public class ThirdPersonMovement : MonoBehaviour
     private float currentSpeed;
     private float rotationVelocity;
 
+
+    private float inputX;
+    private float inputZ;
+
+    private bool jumping;
+    public int playerNum;
+
     void Start()
     {
         cc = GetComponent<CharacterController>();
@@ -41,8 +48,19 @@ public class ThirdPersonMovement : MonoBehaviour
     private void HandleMovement()
     {
         //Read input (old Input Manager)
-        float inputX = Input.GetAxis("Horizontal");
-        float inputZ = Input.GetAxis("Vertical");
+        if (playerNum == 1)
+        {
+            inputX = Input.GetAxis("Horizontal_P1");
+            inputZ = -Input.GetAxis("Vertical_P1");
+            jumping = Input.GetButtonDown("Jump_P1");
+        }
+        else
+        {
+            inputX = Input.GetAxis("Horizontal_P2");
+            inputZ = -Input.GetAxis("Vertical_P2");
+            jumping = Input.GetButtonDown("Jump_P2");
+        }
+        
         Vector3 inputDir = new Vector3(inputX, 0f, inputZ);
         float inputMagnitude = Mathf.Clamp01(inputDir.magnitude);
         inputDir = inputDir.normalized;
@@ -87,7 +105,7 @@ public class ThirdPersonMovement : MonoBehaviour
             if (verticalVelocity < 0f)
                 verticalVelocity = -2f; // small downward force to keep grounded
 
-            if (Input.GetButtonDown("Jump"))
+            if (jumping)
             {
                 verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravity);
             }

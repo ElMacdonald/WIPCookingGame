@@ -18,6 +18,10 @@ public class Weapon : MonoBehaviour
     public bool reloadInProgress;
     public float firerateTimer;
 
+    public int playerNum;
+    private bool fireButton;
+    private bool reloadButton;
+
     void Start()
     {
         cam = Camera.main.transform;
@@ -40,6 +44,11 @@ public class Weapon : MonoBehaviour
             if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hit, range))
             {
                 Debug.Log("Hit " + hit.transform.name);
+                Health target = hit.transform.GetComponent<Health>();
+                if (target != null)
+                {
+                    target.takeDamage(dmg);
+                }
             }
         }
     }
@@ -81,20 +90,32 @@ public class Weapon : MonoBehaviour
     //Shakes camera for enhanced gunplay feel
     private void CamShake()
     {
-
+        cam.GetComponent<CameraShake>().Shake();
     }
 
     //handles input from player
     private void InputManager()
     {
+        if (playerNum == 1)
+        {
+            fireButton = Input.GetAxis("Fire_P1") > 0;
+            reloadButton = Input.GetAxis("Reload_P1") > 0;
+        }
+        else
+        {
+            fireButton = Input.GetAxis("Fire_P2") > 0;
+            reloadButton = Input.GetAxis("Reload_P2") > 0;
+        }
+        
         //Shooting
-        if (Input.GetAxis("Fire1") != 0 && firerate < firerateTimer)
+        if (fireButton && firerate < firerateTimer)
         {
             Fire();
+            CamShake();
         }
 
         //Reloading
-        if (Input.GetKeyDown(KeyCode.R) && !reloadInProgress)
+        if (reloadButton && !reloadInProgress)
         {
             StartCoroutine(Reload());
             Debug.Log("Reloading");
