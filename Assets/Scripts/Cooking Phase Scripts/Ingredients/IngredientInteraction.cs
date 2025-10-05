@@ -9,12 +9,24 @@ public class IngredientInteraction : MonoBehaviour
     public bool canTrash;
     public bool canCook;
 
+    public int playerNum;
+    private bool interactPressed;
+
     // Checks for input from user and verifies if they're able to interact with ingredient bins or trash
     // If they are, it will either trash the ingredient they're holding or deposit it into the closest bin
     // If there are multiple bins in range, it will deposit it into the closest one
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && (canInteract || canTrash || canCook))
+        if (playerNum == 1)
+        {
+            interactPressed = Input.GetAxisRaw("Interact_P1") > 0;
+        }
+        else
+        {
+            interactPressed = Input.GetAxisRaw("Interact_P2") > 0;
+        }
+
+        if (interactPressed && (canInteract || canTrash || canCook))
         {
             if (canTrash)
             {
@@ -22,7 +34,18 @@ public class IngredientInteraction : MonoBehaviour
             }
             else if (canCook)
             {
-                GameObject cookingStation = GameObject.FindGameObjectWithTag("Cooking Station");
+                GameObject cookingStation;
+                if (playerNum == 1)
+                {
+                    cookingStation = GameObject.Find("Cooking Station P1");
+                }
+                else
+                {
+                    cookingStation = GameObject.Find("Cooking Station P2");
+                }
+
+            
+
                 if (cookingStation != null)
                 {
                     CookingStation cs = cookingStation.GetComponent<CookingStation>();

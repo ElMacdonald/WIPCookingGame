@@ -6,13 +6,15 @@ public class ControlBillboard : MonoBehaviour
     public Transform target;
     public Transform player;
     public IngredientInteraction ie;
+
+    public int playerNum;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         target = this.transform;
-        cam = Camera.main.transform;
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        ie = player.GetComponent<IngredientInteraction>();
+        //cam = Camera.main.transform;
+        //player = GameObject.FindGameObjectWithTag("Player").transform;
+        //ie = player.GetComponent<IngredientInteraction>();
     }
 
     // Update is called once per frame
@@ -22,11 +24,11 @@ public class ControlBillboard : MonoBehaviour
         target.LookAt(target.position + cam.forward);
         if(ie.canInteract || ie.canTrash || ie.canCook)
         {
-            gameObject.GetComponent<MeshRenderer>().enabled = true;
+            gameObject.GetComponent<SpriteRenderer>().enabled = true;
         }
         else
         {
-            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
         }
     }
 }

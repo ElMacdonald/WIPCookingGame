@@ -285,6 +285,7 @@ MonoBehaviour:
   scrollSensitivity: 0
   minDistance: 3
   maxDistance: 3
+  playerNum: 1
 --- !u!114 &230303299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -770,6 +771,7 @@ MonoBehaviour:
   jumpHeight: 1.6
   terminalVelocity: -50
   cameraTransform: {fileID: 0}
+  playerNum: 1
 --- !u!1 &703069837
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,6 +811,7 @@ MonoBehaviour:
   audios: []
   reloadInProgress: 0
   firerateTimer: 0
+  playerNum: 1
 --- !u!4 &703069839
 Transform:
   m_ObjectHideFlags: 0

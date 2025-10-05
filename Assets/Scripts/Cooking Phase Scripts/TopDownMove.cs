@@ -9,11 +9,21 @@ public class TopDownMove : MonoBehaviour
     public float speed;
     public float rotationSpeed;
 
+    public int playerNum;
+
     void FixedUpdate()
     {
         //gets input
-        vertical = Input.GetAxisRaw("Vertical");
-        horizontal = Input.GetAxisRaw("Horizontal");
+        if (playerNum == 1)
+        {
+            vertical = -Input.GetAxis("Vertical_P1");
+            horizontal = Input.GetAxis("Horizontal_P1");
+        }
+        else
+        {
+            vertical = -Input.GetAxis("Vertical_P2");
+            horizontal = Input.GetAxis("Horizontal_P2");
+        }
 
         //creates movement vector
         move = new Vector3(horizontal, 0, vertical).normalized;

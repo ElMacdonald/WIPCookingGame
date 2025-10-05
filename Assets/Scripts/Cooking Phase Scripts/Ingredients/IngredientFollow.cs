@@ -10,7 +10,7 @@ public class IngredientFollow : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        //player = GameObject.FindGameObjectWithTag("Player").transform;
         ih = player.GetComponent<IngredientHolding>();
     }
 

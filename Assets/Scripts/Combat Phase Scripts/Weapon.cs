@@ -18,6 +18,10 @@ public class Weapon : MonoBehaviour
     public bool reloadInProgress;
     public float firerateTimer;
 
+    public int playerNum;
+    private bool fireButton;
+    private bool reloadButton;
+
     void Start()
     {
         cam = Camera.main.transform;
@@ -92,15 +96,26 @@ public class Weapon : MonoBehaviour
     //handles input from player
     private void InputManager()
     {
+        if (playerNum == 1)
+        {
+            fireButton = Input.GetAxis("Fire_P1") > 0;
+            reloadButton = Input.GetAxis("Reload_P1") > 0;
+        }
+        else
+        {
+            fireButton = Input.GetAxis("Fire_P2") > 0;
+            reloadButton = Input.GetAxis("Reload_P2") > 0;
+        }
+        
         //Shooting
-        if (Input.GetAxis("Fire1") != 0 && firerate < firerateTimer)
+        if (fireButton && firerate < firerateTimer)
         {
             Fire();
             CamShake();
         }
 
         //Reloading
-        if (Input.GetKeyDown(KeyCode.R) && !reloadInProgress)
+        if (reloadButton && !reloadInProgress)
         {
             StartCoroutine(Reload());
             Debug.Log("Reloading");
