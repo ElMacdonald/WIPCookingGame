@@ -8211,8 +8211,9 @@ GameObject:
   - component: {fileID: 1174194004}
   - component: {fileID: 1174194003}
   - component: {fileID: 1174194002}
+  - component: {fileID: 1174194005}
   m_Layer: 0
-  m_Name: cutting board
+  m_Name: Cutting Board P2
   m_TagString: Cutting Board
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8310,6 +8311,49 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1174194000}
   m_Mesh: {fileID: 4493585093827132993, guid: 17af539c5d81e1f4ab3337bc40ec94c4, type: 3}
+--- !u!114 &1174194005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174194000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed5e096c477745c4da54afc559813346, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CuttingBoardMicrogame
+  cuttingBoardPanel: {fileID: 1610719325}
+  cuttingBoardButtonImages:
+  - {fileID: 958227285}
+  - {fileID: 1675829609}
+  - {fileID: 714282045}
+  - {fileID: 663330781}
+  - {fileID: 1408314042}
+  - {fileID: 1177674015}
+  - {fileID: 924274697}
+  - {fileID: 1528165178}
+  cuttingBoardButtonSprites:
+  - {fileID: 21300000, guid: 2f054e2fa5aff9c418ed7b6e552d58e5, type: 3}
+  - {fileID: 21300000, guid: e5f5b635096afd44da18c1afcfa10959, type: 3}
+  - {fileID: 21300000, guid: fd2a7f874e9d7f74693c8337d6e4d59f, type: 3}
+  - {fileID: 21300000, guid: 1696c0ff64002a44eb7002ab6e18c262, type: 3}
+  - {fileID: 21300000, guid: 7bb0b0d004cfef249ac9aeb762de6ee0, type: 3}
+  - {fileID: 21300000, guid: e89131774baa68240b985092da5d4470, type: 3}
+  perfectCutSprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  imperfectCutSprite: {fileID: 21300000, guid: ae46f0efce155cd43b9bfa102c80816f, type: 3}
+  buttonOne:
+  - 
+  - 
+  - 
+  - 
+  buttonTwo:
+  - 
+  - 
+  - 
+  - 
+  feedbackDuration: 0.4
+  playerNum: 2
 --- !u!1 &1175027551
 GameObject:
   m_ObjectHideFlags: 0
@@ -11998,6 +12042,117 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1574009212}
   m_Mesh: {fileID: -8977277445436624447, guid: 3e18ed1ba3bd46240a7abc32747c9565, type: 3}
+--- !u!1 &1581676845
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1581676846}
+  - component: {fileID: 1581676849}
+  - component: {fileID: 1581676848}
+  - component: {fileID: 1581676847}
+  m_Layer: 0
+  m_Name: Cooking Point 3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1581676846
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1581676845}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.8000001, z: -0.25}
+  m_LocalScale: {x: 0.40653825, y: 0.40653834, z: 0.40653825}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 543450651786345588}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1581676847
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1581676845}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1581676848
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1581676845}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1581676849
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1581676845}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1585158730
 GameObject:
   m_ObjectHideFlags: 0
@@ -14039,7 +14194,7 @@ Transform:
   m_GameObject: {fileID: 1918862437}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.8000001, z: 0.61}
+  m_LocalPosition: {x: -0, y: 0.8000001, z: 0.97}
   m_LocalScale: {x: 0.40653825, y: 0.40653834, z: 0.40653825}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15712,6 +15867,7 @@ Transform:
   - {fileID: 762595372774689315}
   - {fileID: 1939859940}
   - {fileID: 1918862441}
+  - {fileID: 1581676846}
   m_Father: {fileID: 1314952840}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!4 &543450651999872012
@@ -16318,11 +16474,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa2ca9192780fd94ba7f5b64ca5bb565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CookingStation
-  maxIngredients: 2
+  maxIngredients: 3
   ingredientPositions:
   - {fileID: 1939859940}
   - {fileID: 1918862441}
+  - {fileID: 1581676846}
   createdIngredients:
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   ie: {fileID: 1393529680}
