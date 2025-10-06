@@ -7,6 +7,8 @@ TagManager:
   - Ingredient
   - Trash
   - Cooking Station
+  - Recipe Book
+  - Cutting Board
   layers:
   - Default
   - TransparentFX
