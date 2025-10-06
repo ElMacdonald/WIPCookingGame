@@ -22,7 +22,7 @@ public class ControlBillboard : MonoBehaviour
     {
         target.position = player.position + new Vector3(0, 2, 0);
         target.LookAt(target.position + cam.forward);
-        if(ie.canInteract || ie.canTrash || ie.canCook)
+        if(ie.canInteract || ie.canTrash || ie.canCook || ie.canBook || ie.canCut)
         {
             gameObject.GetComponent<SpriteRenderer>().enabled = true;
         }

@@ -8,6 +8,9 @@ public class IngredientInteraction : MonoBehaviour
     public bool canInteract;
     public bool canTrash;
     public bool canCook;
+    public bool canBook;
+    public bool canCut;
+    public bool cutting;
 
     public int playerNum;
     private bool interactPressed;
@@ -26,8 +29,31 @@ public class IngredientInteraction : MonoBehaviour
             interactPressed = Input.GetAxisRaw("Interact_P2") > 0;
         }
 
-        if (interactPressed && (canInteract || canTrash || canCook))
+        if (interactPressed && (canInteract || canTrash || canCook || canCut))
         {
+            if (canCut && !cutting)
+            {
+                cutting = true;
+                GameObject cuttingBoard;
+                if (playerNum == 1)
+                {
+                    cuttingBoard = GameObject.Find("Cutting Board P1");
+                }
+                else
+                {
+                    cuttingBoard = GameObject.Find("Cutting Board P2");
+                }
+
+                if (cuttingBoard != null)
+                {
+                    CuttingBoardMicrogame cb = cuttingBoard.GetComponent<CuttingBoardMicrogame>();
+                    if (cb != null)
+                    {
+                        cb.OpenMenu();
+                    }
+                }
+                return;
+            }
             if (canTrash)
             {
                 gameObject.GetComponent<IngredientHolding>().trashIngredient();
@@ -44,7 +70,7 @@ public class IngredientInteraction : MonoBehaviour
                     cookingStation = GameObject.Find("Cooking Station P2");
                 }
 
-            
+
 
                 if (cookingStation != null)
                 {
@@ -121,6 +147,15 @@ public class IngredientInteraction : MonoBehaviour
         {
             canCook = true;
         }
+
+        if (other.gameObject.tag == "Cutting Board")
+        {
+            canCut = true;
+        }
+        if (other.gameObject.tag == "Recipe Book")
+        {
+            canBook = true;
+        }
     }
 
     // Used whenever player leaves the trigger area of bins and stations
@@ -141,10 +176,18 @@ public class IngredientInteraction : MonoBehaviour
         {
             canTrash = false;
         }
-        
-        if(other.gameObject.tag == "Cooking Station")
+
+        if (other.gameObject.tag == "Cooking Station")
         {
             canCook = false;
+        }
+        if (other.gameObject.tag == "Cutting Board")
+        {
+            canCut = false;
+        }
+        if (other.gameObject.tag == "Recipe Book")
+        {
+            canBook = false;
         }
     }
 }
