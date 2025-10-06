@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;   
+using UnityEngine.UI;
 
 public class CuttingBoardMicrogame : MonoBehaviour
 {
@@ -20,10 +20,11 @@ public class CuttingBoardMicrogame : MonoBehaviour
     private int currentCut = 0;
     private bool waitingForSecondInput = false;
     private bool gameActive = false;
+    private bool inputLocked = false;
 
     [Header("Settings")]
     public float feedbackDuration = 0.4f;  // seconds before next cut
-
+    public float inputDelay = 0.25f;       // delay after opening menu
 
     public int playerNum;
 
@@ -32,8 +33,16 @@ public class CuttingBoardMicrogame : MonoBehaviour
         cuttingBoardPanel.SetActive(true);
         currentCut = 0;
         waitingForSecondInput = false;
+        StartCoroutine(EnableAfterDelay(inputDelay)); // delay input so open button isn’t detected
+    }
+
+    IEnumerator EnableAfterDelay(float delay)
+    {
+        inputLocked = true;
+        SetButtonImages(); // preload button images
+        yield return new WaitForSeconds(delay);
+        inputLocked = false;
         gameActive = true;
-        SetButtonImages();
     }
 
     void SetButtonImages()
@@ -52,7 +61,7 @@ public class CuttingBoardMicrogame : MonoBehaviour
 
     void Update()
     {
-        if (!gameActive) return;
+        if (!gameActive || inputLocked) return;
 
         // Check all button inputs each frame
         foreach (string button in buttonNames)
@@ -169,7 +178,6 @@ public class CuttingBoardMicrogame : MonoBehaviour
                     return false;
             }
         }
-        
     }
 
     void FailMinigame()
@@ -177,6 +185,7 @@ public class CuttingBoardMicrogame : MonoBehaviour
         Debug.Log("You failed the cut!");
         cuttingBoardPanel.SetActive(false);
         gameActive = false;
+
         if (playerNum == 1)
         {
             GameObject player = GameObject.Find("Player1");
@@ -222,6 +231,7 @@ public class CuttingBoardMicrogame : MonoBehaviour
         Debug.Log("All cuts perfect!");
         cuttingBoardPanel.SetActive(false);
         gameActive = false;
+
         if (playerNum == 1)
         {
             GameObject player = GameObject.Find("Player1");
@@ -232,6 +242,7 @@ public class CuttingBoardMicrogame : MonoBehaviour
                 if (ih != null && ih.ingredientCurrentlyHeld != null)
                 {
                     ih.ingredientCurrentlyHeld.quality = "Perfectly Cut " + ih.ingredientCurrentlyHeld.quality;
+                    ih.ingredientCurrentlyHeld.name = "Cut " + ih.ingredientCurrentlyHeld.name;
                     Debug.Log("Ingredient is now: " + ih.ingredientCurrentlyHeld.quality);
                 }
                 if (ii != null)
@@ -250,6 +261,7 @@ public class CuttingBoardMicrogame : MonoBehaviour
                 if (ih != null && ih.ingredientCurrentlyHeld != null)
                 {
                     ih.ingredientCurrentlyHeld.quality = "Perfectly Cut " + ih.ingredientCurrentlyHeld.quality;
+                    ih.ingredientCurrentlyHeld.name = "Cut " + ih.ingredientCurrentlyHeld.name;
                     Debug.Log("Ingredient is now: " + ih.ingredientCurrentlyHeld.name);
                 }
                 if (ii != null)

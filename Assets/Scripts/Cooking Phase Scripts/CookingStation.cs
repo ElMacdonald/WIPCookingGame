@@ -5,6 +5,7 @@ public class CookingStation : MonoBehaviour
 {
     public List<Ingredient> ingredientsInStation = new List<Ingredient>();
 
+
     public int maxIngredients;
     public Transform[] ingredientPositions;
 
@@ -15,6 +16,10 @@ public class CookingStation : MonoBehaviour
     public float cookTime;
     public float cookTimer;
     public bool cooking;
+
+    public GameObject shrimpGunPrefab;
+    public GameObject bamboomstickPrefab;
+    public WinCondition wc;
 
     public void AddIngredient(Ingredient ingredient)
     {
@@ -36,7 +41,7 @@ public class CookingStation : MonoBehaviour
             ie.canCook = false;
         }
     }
-    
+
     void FixedUpdate()
     {
         if (cooking)
@@ -44,13 +49,75 @@ public class CookingStation : MonoBehaviour
             cookTimer -= Time.deltaTime;
             if (cookTimer <= 0)
             {
+                checkIfCorrectRecipe();
                 cooking = false;
                 foreach (GameObject go in createdIngredients)
                 {
                     Destroy(go);
                 }
                 ingredientsInStation.Clear();
+
             }
         }
     }
+
+    // Checks if the ingredients in the station match one of the two valid recipes
+    public void checkIfCorrectRecipe()
+    {
+        if (ingredientsInStation.Count == 0) return;
+
+        // Extract ingredient names
+        List<string> names = new List<string>();
+        foreach (Ingredient ing in ingredientsInStation)
+        {
+            names.Add(ing.name);
+        }
+
+        // Define the two valid recipes
+        string[] recipe1 = { "Cut Salmon", "Scrap Metal", "Cut Bamboo" };
+        string[] recipe2 = { "Cut Shrimp", "Scrap Metal", "Cut Bamboo" };
+
+        // Check for matches (ignoring order)
+        bool matchRecipe1 = true;
+        bool matchRecipe2 = true;
+
+        foreach (string req in recipe1)
+        {
+            if (!names.Contains(req))
+            {
+                matchRecipe1 = false;
+                break;
+            }
+        }
+
+        foreach (string req in recipe2)
+        {
+            if (!names.Contains(req))
+            {
+                matchRecipe2 = false;
+                break;
+            }
+        }
+
+        if (matchRecipe1)
+        {
+            Debug.Log("Correct Recipe: Bamboomstick!");
+            // TODO: Instantiate salmon dish prefab here
+            Instantiate(bamboomstickPrefab, this.transform.position + new Vector3(0, 1, 0), Quaternion.identity * Quaternion.Euler(0, 90, 45));
+            wc.declareWinner(ie.playerNum);
+        }
+        else if (matchRecipe2)
+        {
+            Debug.Log("Correct Recipe: Shrimp Pistol!");
+            // TODO: Instantiate shrimp dish prefab here
+            Instantiate(shrimpGunPrefab, this.transform.position + new Vector3(0, 1, 0), Quaternion.identity * Quaternion.Euler(0, 90, 45));
+            wc.declareWinner(ie.playerNum);
+        }
+        else
+        {
+            Debug.Log("Wrong recipe! Ingredients trashed.");
+            // TODO: Play fail sound or spawn trash particles
+        }
+    }
+
 }

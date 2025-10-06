@@ -31,7 +31,7 @@ public class IngredientInteraction : MonoBehaviour
 
         if (interactPressed && (canInteract || canTrash || canCook || canCut))
         {
-            if (canCut && !cutting)
+            if (canCut && !cutting && gameObject.GetComponent<IngredientHolding>().ingredientCurrentlyHeld != null)
             {
                 cutting = true;
                 GameObject cuttingBoard;
