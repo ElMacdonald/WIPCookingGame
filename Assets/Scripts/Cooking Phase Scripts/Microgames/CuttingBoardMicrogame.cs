@@ -183,6 +183,13 @@ public class CuttingBoardMicrogame : MonoBehaviour
             if (player != null)
             {
                 IngredientInteraction ii = player.GetComponent<IngredientInteraction>();
+                IngredientHolding ih = player.GetComponent<IngredientHolding>();
+                if (ih != null && ih.ingredientCurrentlyHeld != null)
+                {
+                    ih.ingredientCurrentlyHeld.quality = "Imperfectly Cut " + ih.ingredientCurrentlyHeld.quality;
+                    Debug.Log("Ingredient is now: " + ih.ingredientCurrentlyHeld.quality);
+                    ih.trashIngredient();
+                }
                 if (ii != null)
                 {
                     ii.cutting = false;
@@ -195,6 +202,13 @@ public class CuttingBoardMicrogame : MonoBehaviour
             if (player != null)
             {
                 IngredientInteraction ii = player.GetComponent<IngredientInteraction>();
+                IngredientHolding ih = player.GetComponent<IngredientHolding>();
+                if (ih != null && ih.ingredientCurrentlyHeld != null)
+                {
+                    ih.ingredientCurrentlyHeld.quality = "Imperfectly Cut " + ih.ingredientCurrentlyHeld.quality;
+                    Debug.Log("Ingredient is now: " + ih.ingredientCurrentlyHeld.name);
+                    ih.trashIngredient();
+                }
                 if (ii != null)
                 {
                     ii.cutting = false;
@@ -214,6 +228,12 @@ public class CuttingBoardMicrogame : MonoBehaviour
             if (player != null)
             {
                 IngredientInteraction ii = player.GetComponent<IngredientInteraction>();
+                IngredientHolding ih = player.GetComponent<IngredientHolding>();
+                if (ih != null && ih.ingredientCurrentlyHeld != null)
+                {
+                    ih.ingredientCurrentlyHeld.quality = "Perfectly Cut " + ih.ingredientCurrentlyHeld.quality;
+                    Debug.Log("Ingredient is now: " + ih.ingredientCurrentlyHeld.quality);
+                }
                 if (ii != null)
                 {
                     ii.cutting = false;
@@ -226,6 +246,12 @@ public class CuttingBoardMicrogame : MonoBehaviour
             if (player != null)
             {
                 IngredientInteraction ii = player.GetComponent<IngredientInteraction>();
+                IngredientHolding ih = player.GetComponent<IngredientHolding>();
+                if (ih != null && ih.ingredientCurrentlyHeld != null)
+                {
+                    ih.ingredientCurrentlyHeld.quality = "Perfectly Cut " + ih.ingredientCurrentlyHeld.quality;
+                    Debug.Log("Ingredient is now: " + ih.ingredientCurrentlyHeld.name);
+                }
                 if (ii != null)
                 {
                     ii.cutting = false;
