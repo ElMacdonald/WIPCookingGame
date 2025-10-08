@@ -771,7 +771,7 @@ MonoBehaviour:
   jumpHeight: 1.6
   terminalVelocity: -50
   cameraTransform: {fileID: 0}
-  playerNum: 1
+  playerNum: 2
 --- !u!1 &703069837
 GameObject:
   m_ObjectHideFlags: 0

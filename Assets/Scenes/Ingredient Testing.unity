@@ -4776,6 +4776,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 390906500}
+  - component: {fileID: 390906501}
   m_Layer: 0
   m_Name: food crate (1)
   m_TagString: Untagged
@@ -4801,6 +4802,27 @@ Transform:
   - {fileID: 886954118}
   m_Father: {fileID: 1958244059}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &390906501
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390906499}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.54, y: 1.11, z: 1.52}
+  m_Center: {x: 0, y: 1.41, z: 0}
 --- !u!1 &397255107
 GameObject:
   m_ObjectHideFlags: 0
@@ -10229,6 +10251,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 962463638}
+  - component: {fileID: 962463639}
   m_Layer: 0
   m_Name: food crate
   m_TagString: Untagged
@@ -10254,6 +10277,27 @@ Transform:
   - {fileID: 1301227808}
   m_Father: {fileID: 1958244059}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &962463639
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 962463637}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.54, y: 1.11, z: 1.52}
+  m_Center: {x: 0, y: 1.41, z: 0}
 --- !u!1 &963951816
 GameObject:
   m_ObjectHideFlags: 0
@@ -11902,6 +11946,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1179197833}
+  - component: {fileID: 1179197834}
   m_Layer: 0
   m_Name: food crate (2)
   m_TagString: Untagged
@@ -11927,6 +11972,27 @@ Transform:
   - {fileID: 915967956}
   m_Father: {fileID: 1958244059}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1179197834
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1179197832}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.54, y: 1.11, z: 1.52}
+  m_Center: {x: 0, y: 1.41, z: 0}
 --- !u!1 &1180276549
 GameObject:
   m_ObjectHideFlags: 0
@@ -14905,6 +14971,7 @@ GameObject:
   - component: {fileID: 1446340495}
   - component: {fileID: 1446340497}
   - component: {fileID: 1446340496}
+  - component: {fileID: 1446340498}
   m_Layer: 0
   m_Name: salmon
   m_TagString: Ingredient
@@ -14967,9 +15034,30 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 4
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &1446340498
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446340494}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.25, y: 1.97, z: 6.99}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1449117443
 GameObject:
