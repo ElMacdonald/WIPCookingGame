@@ -1,5 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
+
+
+// Script that handles the knife's animations
+
 public class KnifeAnim : MonoBehaviour
 {
     public Sprite[] knifeSprites;
@@ -7,7 +11,7 @@ public class KnifeAnim : MonoBehaviour
     public float frameRate = 0.1f; // Time in seconds between frames
     private float timer = 0f;
     private Image spriteRenderer;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         spriteRenderer = GetComponent<Image>();
@@ -17,7 +21,6 @@ public class KnifeAnim : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         timer += Time.deltaTime;

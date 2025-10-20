@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+//Temp combat win condition for playtests
+
 public class CombatWinCon : MonoBehaviour
 {
     public Health player1Health;
@@ -19,7 +22,7 @@ public class CombatWinCon : MonoBehaviour
             Debug.Log("Player 1 Wins!");
             Time.timeScale = 0;
         }
-        if(Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(0);
         }

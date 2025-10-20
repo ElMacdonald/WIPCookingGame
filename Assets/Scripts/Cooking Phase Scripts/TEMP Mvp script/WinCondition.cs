@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// The win con for the cooking phases, determines which player gets an advantage in combat
+
 public class WinCondition : MonoBehaviour
 {
     public GameObject p1WinText;
@@ -28,7 +30,7 @@ public class WinCondition : MonoBehaviour
 
     void Update()
     {
-        
+
         if (hasWinner)
         {
             timer += Time.unscaledDeltaTime;

@@ -22,7 +22,7 @@ public class Weapon : MonoBehaviour
 
     [Header("References")]
     public GameObject player;                // the owner of this weapon (will be ignored by raycasts)
-    public GameObject[] playersToIgnore;     // optionally ignore other players (e.g., teammates)
+    public GameObject[] playersToIgnore;     // optionally ignore other players (teammates)
     public Transform muzzlePoint;            // where the tracer starts
 
     [Header("Audio")]
@@ -90,7 +90,7 @@ public class Weapon : MonoBehaviour
 
         System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
 
-        // Build a set of colliders to ignore: the shooter + any playersToIgnore
+        // Build a set of colliders to ignore: the shooter + any playersToIgnore (teammates)
         HashSet<Collider> ignoreColliders = new HashSet<Collider>();
         if (player != null)
         {
@@ -108,7 +108,7 @@ public class Weapon : MonoBehaviour
         }
 
         // Iterate hits and find the first valid (non-ignored) hit
-        Vector3 finalHitPoint = rayOrigin + rayDirection * range; // fallback
+        Vector3 finalHitPoint = rayOrigin + rayDirection * range; 
         bool foundValid = false;
 
         foreach (var h in hits)
@@ -150,7 +150,6 @@ public class Weapon : MonoBehaviour
         GameObject trailObj = new GameObject("BulletTrail");
         LineRenderer lr = trailObj.AddComponent<LineRenderer>();
 
-        // Copy material so changing alpha doesn't affect the shared asset
         lr.material = new Material(bulletTrailMaterial);
         lr.startWidth = trailWidth;
         lr.endWidth = trailWidth;

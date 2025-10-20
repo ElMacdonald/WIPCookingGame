@@ -32,6 +32,8 @@ public class CuttingBoardMicrogame : MonoBehaviour
 
     private GameObject currentKnifeInstance;
 
+
+    // Opens the cutting board microgame UI and initializes the game state
     public void OpenMenu()
     {
         cuttingBoardPanel.SetActive(true);
@@ -47,6 +49,7 @@ public class CuttingBoardMicrogame : MonoBehaviour
         StartCoroutine(EnableAfterDelay(inputDelay)); // delay input so open button isn’t detected
     }
 
+    // Coroutine to enable input after a delay
     IEnumerator EnableAfterDelay(float delay)
     {
         inputLocked = true;
@@ -57,6 +60,7 @@ public class CuttingBoardMicrogame : MonoBehaviour
         gameActive = true;
     }
 
+    // Randomly assigns button images and stores their names for the cutting sequence
     void SetButtonImages()
     {
         for (int i = 0; i < 4; i++)
@@ -99,6 +103,7 @@ public class CuttingBoardMicrogame : MonoBehaviour
         }
     }
 
+    // Update is called once per frame, checks for player input
     void Update()
     {
         if (!gameActive || inputLocked) return;
@@ -113,6 +118,8 @@ public class CuttingBoardMicrogame : MonoBehaviour
         }
     }
 
+
+    // Handles input for the cutting microgame, checking first and second button presses
     void HandleInput(string pressedButton)
     {
         if (!waitingForSecondInput)
@@ -201,6 +208,7 @@ public class CuttingBoardMicrogame : MonoBehaviour
         inputLocked = false;
     }
 
+    // Function that takes player number and button name, returns if that button was pressed this frame
     bool GetButtonDown(string buttonName)
     {
         if (playerNum == 1)
@@ -231,6 +239,8 @@ public class CuttingBoardMicrogame : MonoBehaviour
         }
     }
 
+
+    // For when the player fails the minigame, trashes the ingredient
     void FailMinigame()
     {
         Debug.Log("You failed the cut!");
@@ -277,6 +287,8 @@ public class CuttingBoardMicrogame : MonoBehaviour
         }
     }
 
+
+    // For when the minigame is won, gives the player the cut ingredient
     void WinMinigame()
     {
         Debug.Log("All cuts perfect!");
