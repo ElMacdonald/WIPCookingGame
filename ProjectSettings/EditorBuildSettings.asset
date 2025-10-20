@@ -11,6 +11,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Ingredient Testing.unity
     guid: 47129304e7d9a8e41876bd2d0a595f0a
+  - enabled: 1
+    path: Assets/Scenes/P1WinsCombat.unity
+    guid: ddb357481c7200d4984136c540a86708
+  - enabled: 1
+    path: Assets/Scenes/P2WinsCombat.unity
+    guid: 38670abd5205b56489eef7e5454d7639
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

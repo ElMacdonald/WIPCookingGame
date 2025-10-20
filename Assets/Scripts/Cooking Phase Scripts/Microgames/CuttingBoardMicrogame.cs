@@ -8,6 +8,7 @@ public class CuttingBoardMicrogame : MonoBehaviour
     public GameObject cuttingBoardPanel;
     public GameObject[] cuttingBoardButtonImages;  // Top 4 + bottom 4 = 8
     public Sprite[] cuttingBoardButtonSprites;
+    public Sprite[] cuttingBoardButtonHighlightSprites;
 
     [Header("Cut Result Sprites")]
     public Sprite perfectCutSprite;
@@ -27,12 +28,22 @@ public class CuttingBoardMicrogame : MonoBehaviour
     public float inputDelay = 0.25f;       // delay after opening menu
 
     public int playerNum;
+    public GameObject knifePrefab;
+
+    private GameObject currentKnifeInstance;
 
     public void OpenMenu()
     {
         cuttingBoardPanel.SetActive(true);
         currentCut = 0;
         waitingForSecondInput = false;
+
+        // Re-enable all buttons in case they were hidden last round
+        foreach (GameObject btn in cuttingBoardButtonImages)
+        {
+            btn.SetActive(true);
+        }
+
         StartCoroutine(EnableAfterDelay(inputDelay)); // delay input so open button isn’t detected
     }
 
@@ -40,6 +51,7 @@ public class CuttingBoardMicrogame : MonoBehaviour
     {
         inputLocked = true;
         SetButtonImages(); // preload button images
+        HighlightNextCut(); // highlight first pair
         yield return new WaitForSeconds(delay);
         inputLocked = false;
         gameActive = true;
@@ -59,11 +71,38 @@ public class CuttingBoardMicrogame : MonoBehaviour
         }
     }
 
+    void HighlightNextCut()
+    {
+        if (currentCut >= 4) return;
+
+        // Reset all to normal first
+        for (int i = 0; i < cuttingBoardButtonImages.Length; i++)
+        {
+            Image img = cuttingBoardButtonImages[i].GetComponent<Image>();
+            if (img != null && i < 4)
+                img.sprite = cuttingBoardButtonSprites[System.Array.IndexOf(buttonNames, buttonOne[i])];
+            else if (img != null && i >= 4)
+                img.sprite = cuttingBoardButtonSprites[System.Array.IndexOf(buttonNames, buttonTwo[i - 4])];
+        }
+
+        // Highlight current top + bottom
+        int topIndex = currentCut;
+        int bottomIndex = currentCut + 4;
+
+        Image topImg = cuttingBoardButtonImages[topIndex].GetComponent<Image>();
+        Image bottomImg = cuttingBoardButtonImages[bottomIndex].GetComponent<Image>();
+
+        if (topImg != null && bottomImg != null)
+        {
+            topImg.sprite = cuttingBoardButtonHighlightSprites[System.Array.IndexOf(buttonNames, buttonOne[currentCut])];
+            bottomImg.sprite = cuttingBoardButtonHighlightSprites[System.Array.IndexOf(buttonNames, buttonTwo[currentCut])];
+        }
+    }
+
     void Update()
     {
         if (!gameActive || inputLocked) return;
 
-        // Check all button inputs each frame
         foreach (string button in buttonNames)
         {
             if (GetButtonDown(button))
@@ -103,10 +142,12 @@ public class CuttingBoardMicrogame : MonoBehaviour
     IEnumerator ShowFeedback(bool success)
     {
         gameActive = false; // pause input during feedback
+        inputLocked = true;
 
-        // Decide which sprite to flash
-        Image topSprite = cuttingBoardButtonImages[currentCut].GetComponent<Image>();
-        Image bottomSprite = cuttingBoardButtonImages[currentCut + 4].GetComponent<Image>();
+        int topIndex = currentCut;
+        int bottomIndex = currentCut + 4;
+        Image topSprite = cuttingBoardButtonImages[topIndex].GetComponent<Image>();
+        Image bottomSprite = cuttingBoardButtonImages[bottomIndex].GetComponent<Image>();
 
         Sprite originalTop = topSprite.sprite;
         Sprite originalBottom = bottomSprite.sprite;
@@ -114,26 +155,50 @@ public class CuttingBoardMicrogame : MonoBehaviour
         topSprite.sprite = success ? perfectCutSprite : imperfectCutSprite;
         bottomSprite.sprite = success ? perfectCutSprite : imperfectCutSprite;
 
-        yield return new WaitForSeconds(feedbackDuration);
-
-        // restore sprites
-        topSprite.sprite = originalTop;
-        bottomSprite.sprite = originalBottom;
-
         if (success)
         {
+            // Spawn knife prefab between the two buttons
+            RectTransform topRect = cuttingBoardButtonImages[topIndex].GetComponent<RectTransform>();
+            RectTransform bottomRect = cuttingBoardButtonImages[bottomIndex].GetComponent<RectTransform>();
+
+            Vector3 midpoint = (topRect.position + bottomRect.position) / 2f;
+            currentKnifeInstance = Instantiate(knifePrefab, midpoint, Quaternion.identity, cuttingBoardPanel.transform);
+        }
+
+        yield return new WaitForSeconds(feedbackDuration);
+
+        // Destroy knife prefab after feedback
+        if (currentKnifeInstance != null)
+        {
+            Destroy(currentKnifeInstance);
+        }
+
+        // Restore sprites or hide buttons depending on success
+        if (success)
+        {
+            cuttingBoardButtonImages[topIndex].SetActive(false);
+            cuttingBoardButtonImages[bottomIndex].SetActive(false);
             waitingForSecondInput = false;
             currentCut++;
 
             if (currentCut >= buttonOne.Length)
+            {
                 WinMinigame();
+            }
             else
+            {
+                HighlightNextCut();
                 gameActive = true;
+            }
         }
         else
         {
+            topSprite.sprite = originalTop;
+            bottomSprite.sprite = originalBottom;
             FailMinigame();
         }
+
+        inputLocked = false;
     }
 
     bool GetButtonDown(string buttonName)
@@ -142,40 +207,26 @@ public class CuttingBoardMicrogame : MonoBehaviour
         {
             switch (buttonName)
             {
-                case "A":
-                    return Input.GetButtonDown("Interact_P1");
-                case "B":
-                    return Input.GetButtonDown("B_P1");
-                case "X":
-                    return Input.GetButtonDown("Reload_P1");
-                case "Y":
-                    return Input.GetButtonDown("Y_P1");
-                case "LT":
-                    return Input.GetButtonDown("L2_P1");
-                case "RT":
-                    return Input.GetButtonDown("Fire_P1");
-                default:
-                    return false;
+                case "A": return Input.GetButtonDown("Interact_P1");
+                case "B": return Input.GetButtonDown("B_P1");
+                case "X": return Input.GetButtonDown("Reload_P1");
+                case "Y": return Input.GetButtonDown("Y_P1");
+                case "LT": return Input.GetButtonDown("L2_P1");
+                case "RT": return Input.GetButtonDown("Fire_P1");
+                default: return false;
             }
         }
         else
         {
             switch (buttonName)
             {
-                case "A":
-                    return Input.GetButtonDown("Interact_P2");
-                case "B":
-                    return Input.GetButtonDown("B_P2");
-                case "X":
-                    return Input.GetButtonDown("Reload_P2");
-                case "Y":
-                    return Input.GetButtonDown("Y_P2");
-                case "LT":
-                    return Input.GetButtonDown("L2_P2");
-                case "RT":
-                    return Input.GetButtonDown("Fire_P2");
-                default:
-                    return false;
+                case "A": return Input.GetButtonDown("Interact_P2");
+                case "B": return Input.GetButtonDown("B_P2");
+                case "X": return Input.GetButtonDown("Reload_P2");
+                case "Y": return Input.GetButtonDown("Y_P2");
+                case "LT": return Input.GetButtonDown("L2_P2");
+                case "RT": return Input.GetButtonDown("Fire_P2");
+                default: return false;
             }
         }
     }
