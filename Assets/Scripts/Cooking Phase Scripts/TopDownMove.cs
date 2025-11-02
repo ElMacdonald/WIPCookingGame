@@ -11,6 +11,7 @@ public class TopDownMove : MonoBehaviour
 
     public int playerNum;
     private PlayerControls input;
+    public CameraPositioner camPos;
 
     void Start()
     {
@@ -38,6 +39,20 @@ public class TopDownMove : MonoBehaviour
         {
             Quaternion targetRotation = Quaternion.LookRotation(move);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
+    }
+
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.name == "Kitchen")
+        {
+            //camPos.MoveToPointOne();
+        }
+        
+        if(other.gameObject.name == "Pantry")
+        {
+            //camPos.MoveToPointTwo();
         }
     }
 }

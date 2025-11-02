@@ -22,7 +22,7 @@ public class InputHandler : MonoBehaviour
         var actions = pi.actions;
         moveAction = actions["Move"];
 
-        // Determine which player this is (0-based → convert to 1-based)
+        // Determine which player this is 
         playerNum = pi.playerIndex + 1;
 
         // Find associated objects in scene (based on consistent naming)
