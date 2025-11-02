@@ -21,6 +21,9 @@ public class CookingStation : MonoBehaviour
     public GameObject bamboomstickPrefab;
     public WinCondition wc;
 
+
+
+    
     public void AddIngredient(Ingredient ingredient)
     {
         if (ingredientsInStation.Count < maxIngredients)
@@ -102,16 +105,16 @@ public class CookingStation : MonoBehaviour
         if (matchRecipe1)
         {
             Debug.Log("Correct Recipe: Bamboomstick!");
-            // TODO: Instantiate salmon dish prefab here
             Instantiate(bamboomstickPrefab, this.transform.position + new Vector3(0, 1, 0), Quaternion.identity * Quaternion.Euler(0, 90, 45));
-            wc.declareWinner(ie.playerNum);
+            wc.declareWinner(ie.playerNum, "Bamboomstick");
+            GameObject.Find("Player"+ie.playerNum).GetComponent<TopDownMove>().enabled = false;
         }
         else if (matchRecipe2)
         {
             Debug.Log("Correct Recipe: Shrimp Pistol!");
-            // TODO: Instantiate shrimp dish prefab here
             Instantiate(shrimpGunPrefab, this.transform.position + new Vector3(0, 1, 0), Quaternion.identity * Quaternion.Euler(0, 90, 45));
-            wc.declareWinner(ie.playerNum);
+            wc.declareWinner(ie.playerNum, "Shrimp pistol");
+            GameObject.Find("Player"+ie.playerNum).GetComponent<TopDownMove>().enabled = false;
         }
         else
         {

@@ -11,21 +11,28 @@ public class WinCondition : MonoBehaviour
     private float timer = 0f;
     private float waitTime = 1f;
     private int sceneToLoad;
+    public TempWeaponGive tempWeaponGive;
 
-    public void declareWinner(int playerNum)
+    public void declareWinner(int playerNum, string dishName)
     {
         if (playerNum == 1)
         {
-            p1WinText.SetActive(true);
+            //p1WinText.SetActive(true);
             sceneToLoad = 1;
+            tempWeaponGive.player1Dish = dishName;
         }
         else
         {
-            p2WinText.SetActive(true);
-            sceneToLoad = 2;
+            //p2WinText.SetActive(true);
+            sceneToLoad = 1;
+            tempWeaponGive.player2Dish = dishName;
         }
-        hasWinner = true;
-        Time.timeScale = 0;
+        if(tempWeaponGive.player1Dish != "" && tempWeaponGive.player2Dish != "")
+        {
+            hasWinner = true;
+            Time.timeScale = 0;
+        }
+        
     }
 
     void Update()

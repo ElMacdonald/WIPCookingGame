@@ -4372,6 +4372,52 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 316618916}
   m_Mesh: {fileID: -4206389054832083760, guid: 914b609990342f040978b64c71ac478a, type: 3}
+--- !u!1 &319255447
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 319255449}
+  - component: {fileID: 319255448}
+  m_Layer: 0
+  m_Name: WEAPON MANAGER
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &319255448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319255447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98613d7862cb9cc48bf7f009b3ffecef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TempWeaponGive
+  player1Dish: 
+  player2Dish: 
+--- !u!4 &319255449
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319255447}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 35.31988, y: 4.11118, z: 1.47}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &335681288
 GameObject:
   m_ObjectHideFlags: 0
@@ -7878,6 +7924,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WinCondition
   p1WinText: {fileID: 1995417958}
   p2WinText: {fileID: 210724914}
+  tempWeaponGive: {fileID: 319255448}
 --- !u!4 &669712070
 Transform:
   m_ObjectHideFlags: 0
@@ -8701,6 +8748,82 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.00001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &735618665
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 735618667}
+  - component: {fileID: 735618666}
+  m_Layer: 0
+  m_Name: PLAYER INPUT MANAGER
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &735618666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735618665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInputManager
+  m_NotificationBehavior: 2
+  m_MaxPlayerCount: 3
+  m_AllowJoining: 1
+  m_JoinBehavior: 0
+  m_PlayerJoinedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_PlayerLeftEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_JoinAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: 
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: e541e04d-5aae-49fc-929b-ddf02d67af23
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_PlayerPrefab: {fileID: 1365110108285971851, guid: c682e635ac7339b4aaf68e72c80a833f, type: 3}
+  m_SplitScreen: 0
+  m_MaintainAspectRatioInSplitScreen: 0
+  m_FixedNumberOfSplitScreens: 2
+  m_SplitScreenRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!4 &735618667
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735618665}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 35.31988, y: 4.11118, z: 1.47}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &742164670
 GameObject:
   m_ObjectHideFlags: 0
@@ -22655,7 +22778,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2004371284413213624}
   m_Layer: 0
-  m_Name: soosh new
+  m_Name: soosh model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28245,7 +28368,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5558956940204706841}
   m_Layer: 0
-  m_Name: stew new
+  m_Name: stew
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33745,3 +33868,5 @@ SceneRoots:
   - {fileID: 1246598442}
   - {fileID: 1658366990}
   - {fileID: 669712070}
+  - {fileID: 319255449}
+  - {fileID: 735618667}

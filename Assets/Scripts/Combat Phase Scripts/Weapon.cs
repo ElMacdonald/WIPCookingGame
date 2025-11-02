@@ -64,7 +64,7 @@ public class Weapon : MonoBehaviour
     // -------------------
     // Public Fire Method
     // -------------------
-    public void Fire()
+    public virtual void Fire()
     {
         if (curMag <= 0)
         {
@@ -107,7 +107,7 @@ public class Weapon : MonoBehaviour
             }
         }
 
-        // Iterate hits and find the first valid (non-ignored) hit
+        // Iterate hits and find the first valid (non ignored) hit
         Vector3 finalHitPoint = rayOrigin + rayDirection * range; 
         bool foundValid = false;
 
@@ -142,7 +142,7 @@ public class Weapon : MonoBehaviour
     // -------------------
     // Tracer visuals
     // -------------------
-    private IEnumerator SpawnBulletTrail(Vector3 hitPoint)
+    public IEnumerator SpawnBulletTrail(Vector3 hitPoint)
     {
         if (muzzlePoint == null || bulletTrailMaterial == null)
             yield break;
@@ -182,7 +182,7 @@ public class Weapon : MonoBehaviour
     // -------------------
     // Crosshair flash
     // -------------------
-    private void FlashCrosshair()
+    public void FlashCrosshair()
     {
         if (crosshair == null) return;
         if (flashCoroutine != null) StopCoroutine(flashCoroutine);

@@ -32,6 +32,15 @@ public class CuttingBoardMicrogame : MonoBehaviour
 
     private GameObject currentKnifeInstance;
 
+    private PlayerControls input;
+
+
+    void Start()
+    {
+        input = new PlayerControls();
+        input.Enable();
+    }
+
 
     // Opens the cutting board microgame UI and initializes the game state
     public void OpenMenu()
@@ -103,6 +112,13 @@ public class CuttingBoardMicrogame : MonoBehaviour
         }
     }
 
+    public void takeInput(string button)
+    {
+        if (!gameActive || inputLocked) return;
+
+        HandleInput(button);
+    }
+
     // Update is called once per frame, checks for player input
     void Update()
     {
@@ -110,7 +126,8 @@ public class CuttingBoardMicrogame : MonoBehaviour
 
         foreach (string button in buttonNames)
         {
-            if (GetButtonDown(button))
+            //if (GetButtonDown(button))
+            if(false)
             {
                 HandleInput(button);
                 break;
@@ -215,12 +232,12 @@ public class CuttingBoardMicrogame : MonoBehaviour
         {
             switch (buttonName)
             {
-                case "A": return Input.GetButtonDown("Interact_P1");
-                case "B": return Input.GetButtonDown("B_P1");
-                case "X": return Input.GetButtonDown("Reload_P1");
-                case "Y": return Input.GetButtonDown("Y_P1");
-                case "LT": return Input.GetButtonDown("L2_P1");
-                case "RT": return Input.GetButtonDown("Fire_P1");
+                case "A": return input.Player.A.ReadValue<float>() > 0;
+                case "B": return input.Player.B.ReadValue<float>() > 0;
+                case "X": return input.Player.X.ReadValue<float>() > 0;
+                case "Y": return input.Player.Y.ReadValue<float>() > 0;
+                case "LT": return input.Player.LT.ReadValue<float>() > 0;
+                case "RT": return input.Player.RT.ReadValue<float>() > 0;
                 default: return false;
             }
         }
@@ -228,12 +245,12 @@ public class CuttingBoardMicrogame : MonoBehaviour
         {
             switch (buttonName)
             {
-                case "A": return Input.GetButtonDown("Interact_P2");
-                case "B": return Input.GetButtonDown("B_P2");
-                case "X": return Input.GetButtonDown("Reload_P2");
-                case "Y": return Input.GetButtonDown("Y_P2");
-                case "LT": return Input.GetButtonDown("L2_P2");
-                case "RT": return Input.GetButtonDown("Fire_P2");
+                case "A": return input.Player.A.ReadValue<float>() > 0;
+                case "B": return input.Player.B.ReadValue<float>() > 0;
+                case "X": return input.Player.X.ReadValue<float>() > 0;
+                case "Y": return input.Player.Y.ReadValue<float>() > 0;
+                case "LT": return input.Player.LT.ReadValue<float>() > 0;
+                case "RT": return input.Player.RT.ReadValue<float>() > 0;
                 default: return false;
             }
         }
