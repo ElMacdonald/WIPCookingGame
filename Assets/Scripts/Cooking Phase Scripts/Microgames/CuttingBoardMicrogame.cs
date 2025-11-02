@@ -9,6 +9,8 @@ public class CuttingBoardMicrogame : MonoBehaviour
     public GameObject[] cuttingBoardButtonImages;  // Top 4 + bottom 4 = 8
     public Sprite[] cuttingBoardButtonSprites;
     public Sprite[] cuttingBoardButtonHighlightSprites;
+    public Sprite[] cuttingBoardIngredientSprites;
+    public Image cuttingBoardIngredientImage;
 
     [Header("Cut Result Sprites")]
     public Sprite perfectCutSprite;
@@ -19,21 +21,24 @@ public class CuttingBoardMicrogame : MonoBehaviour
     public string[] buttonTwo = new string[4];
 
     private int currentCut = 0;
-    private bool waitingForSecondInput = false;
     private bool gameActive = false;
     private bool inputLocked = false;
 
     [Header("Settings")]
     public float feedbackDuration = 0.4f;  // seconds before next cut
     public float inputDelay = 0.25f;       // delay after opening menu
+    public float simultaneousPressWindow = 10f; // max time between top & bottom press
 
     public int playerNum;
     public GameObject knifePrefab;
 
     private GameObject currentKnifeInstance;
-
     private PlayerControls input;
 
+    // Tracking simultaneous presses
+    private bool topPressed = false;
+    private bool bottomPressed = false;
+    private float firstPressTime = 0f;
 
     void Start()
     {
@@ -42,34 +47,74 @@ public class CuttingBoardMicrogame : MonoBehaviour
     }
 
 
-    // Opens the cutting board microgame UI and initializes the game state
+    // Opens the cutting board minigame UI
     public void OpenMenu()
     {
+        if (playerNum == 1)
+        {
+            GameObject player = GameObject.Find("Player1");
+            if (player != null)
+            {
+                IngredientHolding ih = player.GetComponent<IngredientHolding>();
+                if (ih != null && ih.ingredientCurrentlyHeld != null)
+                {
+                    switch (ih.ingredientCurrentlyHeld.name)
+                    {
+                        case "Salmon":
+                            cuttingBoardIngredientImage.sprite = cuttingBoardIngredientSprites[0];
+                            break;
+                        case "Bamboo":
+                            cuttingBoardIngredientImage.sprite = cuttingBoardIngredientSprites[1];
+                            break;
+                        case "Shrimp":
+                            cuttingBoardIngredientImage.sprite = cuttingBoardIngredientSprites[2];
+                            break;
+                        case null:
+                            Debug.Log("Ingredient not cuttable!");
+                            break;
+                    }
+                }
+            }
+        }
+        else
+        {
+            GameObject player = GameObject.Find("Player2");
+            if (player != null)
+            {
+                IngredientHolding ih = player.GetComponent<IngredientHolding>();
+                if (ih != null && ih.ingredientCurrentlyHeld != null)
+                {
+                    cuttingBoardIngredientImage.sprite = cuttingBoardIngredientSprites[System.Array.IndexOf(buttonNames, ih.ingredientCurrentlyHeld.name)];
+                }
+            }
+        }
+
         cuttingBoardPanel.SetActive(true);
         currentCut = 0;
-        waitingForSecondInput = false;
+        topPressed = false;
+        bottomPressed = false;
+        firstPressTime = 0f;
 
-        // Re-enable all buttons in case they were hidden last round
         foreach (GameObject btn in cuttingBoardButtonImages)
         {
             btn.SetActive(true);
         }
 
-        StartCoroutine(EnableAfterDelay(inputDelay)); // delay input so open button isn’t detected
+        StartCoroutine(EnableAfterDelay(inputDelay));
     }
 
-    // Coroutine to enable input after a delay
+    // Enables input after a delay when opening the menu
     IEnumerator EnableAfterDelay(float delay)
     {
         inputLocked = true;
-        SetButtonImages(); // preload button images
-        HighlightNextCut(); // highlight first pair
+        SetButtonImages();
+        HighlightNextCut();
         yield return new WaitForSeconds(delay);
         inputLocked = false;
         gameActive = true;
     }
 
-    // Randomly assigns button images and stores their names for the cutting sequence
+    // Sets random button images for the cutting board buttons
     void SetButtonImages()
     {
         for (int i = 0; i < 4; i++)
@@ -78,17 +123,23 @@ public class CuttingBoardMicrogame : MonoBehaviour
             cuttingBoardButtonImages[i].GetComponent<Image>().sprite = cuttingBoardButtonSprites[randIndex1];
             buttonOne[i] = buttonNames[randIndex1];
 
-            int randIndex2 = Random.Range(0, buttonNames.Length);
+            int randIndex2;
+            // Keep picking until it's different from the top button
+            do
+            {
+                randIndex2 = Random.Range(0, buttonNames.Length);
+            } while (randIndex2 == randIndex1);
+
             cuttingBoardButtonImages[i + 4].GetComponent<Image>().sprite = cuttingBoardButtonSprites[randIndex2];
             buttonTwo[i] = buttonNames[randIndex2];
         }
     }
 
+    // Highlights the next cut's buttons
     void HighlightNextCut()
     {
         if (currentCut >= 4) return;
 
-        // Reset all to normal first
         for (int i = 0; i < cuttingBoardButtonImages.Length; i++)
         {
             Image img = cuttingBoardButtonImages[i].GetComponent<Image>();
@@ -98,20 +149,20 @@ public class CuttingBoardMicrogame : MonoBehaviour
                 img.sprite = cuttingBoardButtonSprites[System.Array.IndexOf(buttonNames, buttonTwo[i - 4])];
         }
 
-        // Highlight current top + bottom
         int topIndex = currentCut;
         int bottomIndex = currentCut + 4;
 
         Image topImg = cuttingBoardButtonImages[topIndex].GetComponent<Image>();
         Image bottomImg = cuttingBoardButtonImages[bottomIndex].GetComponent<Image>();
 
-        if (topImg != null && bottomImg != null)
-        {
+        if (!topPressed && topImg != null)
             topImg.sprite = cuttingBoardButtonHighlightSprites[System.Array.IndexOf(buttonNames, buttonOne[currentCut])];
+        else if (!bottomPressed && bottomImg != null)
             bottomImg.sprite = cuttingBoardButtonHighlightSprites[System.Array.IndexOf(buttonNames, buttonTwo[currentCut])];
-        }
     }
 
+
+    // Handles input from InputHandler
     public void takeInput(string button)
     {
         if (!gameActive || inputLocked) return;
@@ -119,15 +170,20 @@ public class CuttingBoardMicrogame : MonoBehaviour
         HandleInput(button);
     }
 
-    // Update is called once per frame, checks for player input
     void Update()
     {
         if (!gameActive || inputLocked) return;
 
+        // Fail if second button not pressed within time window
+        if ((topPressed || bottomPressed) && Time.time - firstPressTime > simultaneousPressWindow)
+        {
+            StartCoroutine(ShowFeedback(false));
+        }
+
+        // This is your placeholder "always false" check for manual controller input
         foreach (string button in buttonNames)
         {
-            //if (GetButtonDown(button))
-            if(false)
+            if (false) // keep this as-is so nothing happens yet
             {
                 HandleInput(button);
                 break;
@@ -136,40 +192,53 @@ public class CuttingBoardMicrogame : MonoBehaviour
     }
 
 
-    // Handles input for the cutting microgame, checking first and second button presses
+    // Handles input logic for button presses
     void HandleInput(string pressedButton)
     {
-        if (!waitingForSecondInput)
+        int topIndex = currentCut;
+        int bottomIndex = currentCut;
+
+        bool anyNewPress = false;
+
+        if (pressedButton == buttonOne[currentCut] && !topPressed)
         {
-            if (pressedButton == buttonOne[currentCut])
+            topPressed = true;
+            anyNewPress = true;
+        }
+        if (pressedButton == buttonTwo[currentCut] && !bottomPressed)
+        {
+            bottomPressed = true;
+            anyNewPress = true;
+        }
+
+        if (anyNewPress)
+        {
+            if (topPressed && bottomPressed)
             {
-                waitingForSecondInput = true;
+                StartCoroutine(ShowFeedback(true));
             }
             else
             {
-                StartCoroutine(ShowFeedback(false)); // wrong first input
+                if (firstPressTime == 0f)
+                    firstPressTime = Time.time;
+                HighlightNextCut();
             }
         }
         else
         {
-            if (pressedButton == buttonTwo[currentCut])
-            {
-                StartCoroutine(ShowFeedback(true)); // correct full combo
-            }
-            else
-            {
-                StartCoroutine(ShowFeedback(false)); // wrong second input
-            }
+            StartCoroutine(ShowFeedback(false));
         }
     }
 
+    // Shows feedback for success or failure of the cut
     IEnumerator ShowFeedback(bool success)
     {
-        gameActive = false; // pause input during feedback
+        gameActive = false;
         inputLocked = true;
 
         int topIndex = currentCut;
         int bottomIndex = currentCut + 4;
+
         Image topSprite = cuttingBoardButtonImages[topIndex].GetComponent<Image>();
         Image bottomSprite = cuttingBoardButtonImages[bottomIndex].GetComponent<Image>();
 
@@ -181,7 +250,6 @@ public class CuttingBoardMicrogame : MonoBehaviour
 
         if (success)
         {
-            // Spawn knife prefab between the two buttons
             RectTransform topRect = cuttingBoardButtonImages[topIndex].GetComponent<RectTransform>();
             RectTransform bottomRect = cuttingBoardButtonImages[bottomIndex].GetComponent<RectTransform>();
 
@@ -191,24 +259,21 @@ public class CuttingBoardMicrogame : MonoBehaviour
 
         yield return new WaitForSeconds(feedbackDuration);
 
-        // Destroy knife prefab after feedback
         if (currentKnifeInstance != null)
-        {
             Destroy(currentKnifeInstance);
-        }
 
-        // Restore sprites or hide buttons depending on success
         if (success)
         {
             cuttingBoardButtonImages[topIndex].SetActive(false);
             cuttingBoardButtonImages[bottomIndex].SetActive(false);
-            waitingForSecondInput = false;
+
             currentCut++;
+            topPressed = false;
+            bottomPressed = false;
+            firstPressTime = 0f;
 
             if (currentCut >= buttonOne.Length)
-            {
                 WinMinigame();
-            }
             else
             {
                 HighlightNextCut();
@@ -219,6 +284,10 @@ public class CuttingBoardMicrogame : MonoBehaviour
         {
             topSprite.sprite = originalTop;
             bottomSprite.sprite = originalBottom;
+            topPressed = false;
+            bottomPressed = false;
+            firstPressTime = 0f;
+
             FailMinigame();
         }
 
@@ -256,51 +325,25 @@ public class CuttingBoardMicrogame : MonoBehaviour
         }
     }
 
-
-    // For when the player fails the minigame, trashes the ingredient
+    // For when the minigame is failed, gives the player the imperfectly cut ingredient
     void FailMinigame()
     {
         Debug.Log("You failed the cut!");
         cuttingBoardPanel.SetActive(false);
         gameActive = false;
 
-        if (playerNum == 1)
+        GameObject player = playerNum == 1 ? GameObject.Find("Player1") : GameObject.Find("Player2");
+        if (player != null)
         {
-            GameObject player = GameObject.Find("Player1");
-            if (player != null)
+            IngredientInteraction ii = player.GetComponent<IngredientInteraction>();
+            IngredientHolding ih = player.GetComponent<IngredientHolding>();
+            if (ih != null && ih.ingredientCurrentlyHeld != null)
             {
-                IngredientInteraction ii = player.GetComponent<IngredientInteraction>();
-                IngredientHolding ih = player.GetComponent<IngredientHolding>();
-                if (ih != null && ih.ingredientCurrentlyHeld != null)
-                {
-                    ih.ingredientCurrentlyHeld.quality = "Imperfectly Cut " + ih.ingredientCurrentlyHeld.quality;
-                    Debug.Log("Ingredient is now: " + ih.ingredientCurrentlyHeld.quality);
-                    ih.trashIngredient();
-                }
-                if (ii != null)
-                {
-                    ii.cutting = false;
-                }
+                ih.ingredientCurrentlyHeld.quality = "Imperfectly Cut " + ih.ingredientCurrentlyHeld.quality;
+                ih.trashIngredient();
             }
-        }
-        else
-        {
-            GameObject player = GameObject.Find("Player2");
-            if (player != null)
-            {
-                IngredientInteraction ii = player.GetComponent<IngredientInteraction>();
-                IngredientHolding ih = player.GetComponent<IngredientHolding>();
-                if (ih != null && ih.ingredientCurrentlyHeld != null)
-                {
-                    ih.ingredientCurrentlyHeld.quality = "Imperfectly Cut " + ih.ingredientCurrentlyHeld.quality;
-                    Debug.Log("Ingredient is now: " + ih.ingredientCurrentlyHeld.name);
-                    ih.trashIngredient();
-                }
-                if (ii != null)
-                {
-                    ii.cutting = false;
-                }
-            }
+            if (ii != null)
+                ii.cutting = false;
         }
     }
 
@@ -312,43 +355,18 @@ public class CuttingBoardMicrogame : MonoBehaviour
         cuttingBoardPanel.SetActive(false);
         gameActive = false;
 
-        if (playerNum == 1)
+        GameObject player = playerNum == 1 ? GameObject.Find("Player1") : GameObject.Find("Player2");
+        if (player != null)
         {
-            GameObject player = GameObject.Find("Player1");
-            if (player != null)
+            IngredientInteraction ii = player.GetComponent<IngredientInteraction>();
+            IngredientHolding ih = player.GetComponent<IngredientHolding>();
+            if (ih != null && ih.ingredientCurrentlyHeld != null)
             {
-                IngredientInteraction ii = player.GetComponent<IngredientInteraction>();
-                IngredientHolding ih = player.GetComponent<IngredientHolding>();
-                if (ih != null && ih.ingredientCurrentlyHeld != null)
-                {
-                    ih.ingredientCurrentlyHeld.quality = "Perfectly Cut " + ih.ingredientCurrentlyHeld.quality;
-                    ih.ingredientCurrentlyHeld.name = "Cut " + ih.ingredientCurrentlyHeld.name;
-                    Debug.Log("Ingredient is now: " + ih.ingredientCurrentlyHeld.quality);
-                }
-                if (ii != null)
-                {
-                    ii.cutting = false;
-                }
+                ih.ingredientCurrentlyHeld.quality = "Perfectly Cut " + ih.ingredientCurrentlyHeld.quality;
+                ih.ingredientCurrentlyHeld.name = "Cut " + ih.ingredientCurrentlyHeld.name;
             }
-        }
-        else
-        {
-            GameObject player = GameObject.Find("Player2");
-            if (player != null)
-            {
-                IngredientInteraction ii = player.GetComponent<IngredientInteraction>();
-                IngredientHolding ih = player.GetComponent<IngredientHolding>();
-                if (ih != null && ih.ingredientCurrentlyHeld != null)
-                {
-                    ih.ingredientCurrentlyHeld.quality = "Perfectly Cut " + ih.ingredientCurrentlyHeld.quality;
-                    ih.ingredientCurrentlyHeld.name = "Cut " + ih.ingredientCurrentlyHeld.name;
-                    Debug.Log("Ingredient is now: " + ih.ingredientCurrentlyHeld.name);
-                }
-                if (ii != null)
-                {
-                    ii.cutting = false;
-                }
-            }
+            if (ii != null)
+                ii.cutting = false;
         }
     }
 }
