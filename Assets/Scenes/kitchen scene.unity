@@ -10883,6 +10883,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2af181f71afb0b14aa34f42625252577, type: 3}
   - {fileID: 21300000, guid: f5c75bdc8549cc546b1324b447528e90, type: 3}
   - {fileID: 21300000, guid: 0fd0c75057e45ab4cb8d42e990a81ba5, type: 3}
+  cuttingBoardIngredientSprites: []
+  cuttingBoardIngredientImage: {fileID: 0}
   perfectCutSprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   imperfectCutSprite: {fileID: 21300000, guid: ae46f0efce155cd43b9bfa102c80816f, type: 3}
   buttonOne:
@@ -10897,6 +10899,7 @@ MonoBehaviour:
   - 
   feedbackDuration: 0.4
   inputDelay: 0.25
+  simultaneousPressWindow: 0.15
   playerNum: 2
   knifePrefab: {fileID: 8612688571076671116, guid: b83fee962ce8e144ca45fd61aceabafb, type: 3}
 --- !u!65 &593871677
@@ -18098,8 +18101,8 @@ Transform:
   m_GameObject: {fileID: 893093807}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -0.06, z: 0}
+  m_LocalScale: {x: 1.2758, y: 1.2758, z: 1.2758}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 799712568}
@@ -25901,6 +25904,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2af181f71afb0b14aa34f42625252577, type: 3}
   - {fileID: 21300000, guid: f5c75bdc8549cc546b1324b447528e90, type: 3}
   - {fileID: 21300000, guid: 0fd0c75057e45ab4cb8d42e990a81ba5, type: 3}
+  cuttingBoardIngredientSprites:
+  - {fileID: 21300000, guid: ea65c59832b2b9841bae1dfed67759df, type: 3}
+  - {fileID: 21300000, guid: ff7f5c015e361d147ac5d3502db023d5, type: 3}
+  - {fileID: 21300000, guid: 8f9c38871eb625844b31e53c6dfe71d9, type: 3}
+  cuttingBoardIngredientImage: {fileID: 1195029926}
   perfectCutSprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   imperfectCutSprite: {fileID: 21300000, guid: ae46f0efce155cd43b9bfa102c80816f, type: 3}
   buttonOne:
@@ -25915,6 +25923,7 @@ MonoBehaviour:
   - 
   feedbackDuration: 0.4
   inputDelay: 0.25
+  simultaneousPressWindow: 1000
   playerNum: 1
   knifePrefab: {fileID: 8612688571076671116, guid: b83fee962ce8e144ca45fd61aceabafb, type: 3}
 --- !u!65 &1191989032
@@ -26006,7 +26015,7 @@ GameObject:
   - component: {fileID: 1195029927}
   - component: {fileID: 1195029926}
   m_Layer: 5
-  m_Name: Fish
+  m_Name: Ingredient
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68684,7 +68693,7 @@ MonoBehaviour:
   - Stale
   ingredientName: Salmon
   ingredientCooldown: 0
-  ingredientModel: {fileID: 0}
+  ingredientModel: {fileID: 7853786917174961152}
   usable: 0
 --- !u!23 &7403302913012947332
 MeshRenderer:
