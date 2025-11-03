@@ -11,6 +11,8 @@ public class AmmoCounter : MonoBehaviour
     {
         ammoText.text = weapon.curMag + " / " + weapon.magSize + "\n" + weapon.reserveAmmo;
         tempWeaponGive = FindFirstObjectByType<TempWeaponGive>();
+        Debug.Log("Trying to find weapon: " + tempWeaponGive.player2Dish + " " + playerNum);
+        //GameObject.Find(tempWeaponGive.player2Dish + " " + playerNum).SetActive(true);
         weapon = GameObject.Find(tempWeaponGive.player2Dish + " " + playerNum).GetComponent<Weapon>();
     }
 

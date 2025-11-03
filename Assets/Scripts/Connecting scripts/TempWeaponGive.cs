@@ -14,8 +14,8 @@ public class TempWeaponGive : MonoBehaviour
 
     public void giveWeapons()
     {
-        GameObject p1 = GameObject.Find("soosh new");
-        GameObject p2 = GameObject.Find("stew new");
+        GameObject p1 = GameObject.Find("Soosh new");
+        GameObject p2 = GameObject.Find("Stew new");
 
         if (p1 != null)
             ActivateWeaponForPlayer(p1, player1Dish, 1);

@@ -84,7 +84,21 @@ public class CuttingBoardMicrogame : MonoBehaviour
                 IngredientHolding ih = player.GetComponent<IngredientHolding>();
                 if (ih != null && ih.ingredientCurrentlyHeld != null)
                 {
-                    cuttingBoardIngredientImage.sprite = cuttingBoardIngredientSprites[System.Array.IndexOf(buttonNames, ih.ingredientCurrentlyHeld.name)];
+                    switch (ih.ingredientCurrentlyHeld.name)
+                    {
+                        case "Salmon":
+                            cuttingBoardIngredientImage.sprite = cuttingBoardIngredientSprites[0];
+                            break;
+                        case "Bamboo":
+                            cuttingBoardIngredientImage.sprite = cuttingBoardIngredientSprites[1];
+                            break;
+                        case "Shrimp":
+                            cuttingBoardIngredientImage.sprite = cuttingBoardIngredientSprites[2];
+                            break;
+                        case null:
+                            Debug.Log("Ingredient not cuttable!");
+                            break;
+                    }
                 }
             }
         }

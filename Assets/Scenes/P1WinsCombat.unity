@@ -2679,7 +2679,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &869076053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2847,7 +2847,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &952390672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2860,7 +2860,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98613d7862cb9cc48bf7f009b3ffecef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TempWeaponGive
-  player1Dish: Shrimp pistol
+  player1Dish: Bamboomstick
   player2Dish: Bamboomstick
 --- !u!4 &952390673
 Transform:
@@ -4623,7 +4623,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3566271004667913266, guid: 74e1829c6aa50f64e8061d5847f0076c, type: 3}
       propertyPath: m_Name
-      value: stew new
+      value: Stew new
       objectReference: {fileID: 0}
     - target: {fileID: 4141774077382878275, guid: 74e1829c6aa50f64e8061d5847f0076c, type: 3}
       propertyPath: m_Enabled
@@ -4700,7 +4700,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8483668041243390241, guid: d98da6ddadb96c74781f1871ebbc4b7d, type: 3}
       propertyPath: m_Name
-      value: soosh new
+      value: Soosh new
       objectReference: {fileID: 0}
     - target: {fileID: 9149022571161004955, guid: d98da6ddadb96c74781f1871ebbc4b7d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7830,7 +7830,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4760753576828013137
 Transform:
   m_ObjectHideFlags: 0
