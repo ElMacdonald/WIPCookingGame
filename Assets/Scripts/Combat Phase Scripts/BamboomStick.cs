@@ -17,7 +17,7 @@ public class BamboomStick : Weapon
             return;
         }
 
-        // consume one shell per trigger pull
+        
         curMag--;
         firerateTimer = 0f;
 

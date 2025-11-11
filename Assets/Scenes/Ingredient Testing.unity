@@ -3365,7 +3365,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
   m_LocalPosition: {x: 3.5591662, y: 1.4399998, z: 9.618408}
-  m_LocalScale: {x: 2.0394, y: 2.0394, z: 2.0394}
+  m_LocalScale: {x: 0.3201232, y: 0.3201232, z: 0.3201232}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148049426}
@@ -3434,7 +3434,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2f054e2fa5aff9c418ed7b6e552d58e5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 759ac16a86723e44cb2f0ba719bb9422, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3862,7 +3862,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
   m_LocalPosition: {x: 3.559166, y: 1.4399998, z: 9.618408}
-  m_LocalScale: {x: 2.0394, y: 2.0394, z: 2.0394}
+  m_LocalScale: {x: 0.3201232, y: 0.3201232, z: 0.3201232}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 335681289}
@@ -3931,7 +3931,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2f054e2fa5aff9c418ed7b6e552d58e5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 759ac16a86723e44cb2f0ba719bb9422, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4402,8 +4402,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98613d7862cb9cc48bf7f009b3ffecef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TempWeaponGive
-  player1Dish: 
-  player2Dish: 
+  player1Dish: Bamboomstick
+  player2Dish: Bamboomstick
 --- !u!4 &319255449
 Transform:
   m_ObjectHideFlags: 0
@@ -8708,6 +8708,7 @@ MonoBehaviour:
   shrimpGunPrefab: {fileID: 9032743611845700120, guid: 2d0693ab007d68c46825c7aedb053fc3, type: 3}
   bamboomstickPrefab: {fileID: 8798964838175921750, guid: d5c1ab8924b634747a6954cb96a6ba40, type: 3}
   wc: {fileID: 669712069}
+  outputPos: {fileID: 221054577}
 --- !u!65 &727222190
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11925,19 +11926,24 @@ MonoBehaviour:
   - {fileID: 924274697}
   - {fileID: 1528165178}
   cuttingBoardButtonSprites:
-  - {fileID: 21300000, guid: 7a6706110cf2f5e408e33619f3ad976a, type: 3}
-  - {fileID: 21300000, guid: 9dbadf5b02fde3d4b90328df3959895e, type: 3}
-  - {fileID: 21300000, guid: 336ad1ea1bd86d141bc475a011449ba6, type: 3}
-  - {fileID: 21300000, guid: f9943784daac0d7488959aac9a7e7ab0, type: 3}
+  - {fileID: 21300000, guid: e72af77310a173c4bb7e87b4f62f11aa, type: 3}
+  - {fileID: 21300000, guid: 17c3f863333adad4a9b12ff4847e43a0, type: 3}
+  - {fileID: 21300000, guid: 4699c0fc31d34294c84f1526d912ea5d, type: 3}
+  - {fileID: 21300000, guid: 58ade23d3124d8542a4c936db5704fd2, type: 3}
   - {fileID: 21300000, guid: 7bb0b0d004cfef249ac9aeb762de6ee0, type: 3}
   - {fileID: 21300000, guid: e89131774baa68240b985092da5d4470, type: 3}
   cuttingBoardButtonHighlightSprites:
-  - {fileID: 21300000, guid: d8b97aa33264b4a4a8cca53300c40812, type: 3}
-  - {fileID: 21300000, guid: 35683257c5e1bbc41bf27fd5f9f79734, type: 3}
-  - {fileID: 21300000, guid: a6c65069d4b7c094587e1d81875c03b8, type: 3}
-  - {fileID: 21300000, guid: c013f0e371ac5c6478758317423faaed, type: 3}
+  - {fileID: 21300000, guid: 759ac16a86723e44cb2f0ba719bb9422, type: 3}
+  - {fileID: 21300000, guid: 391bf3ff3fb082940b50e430cb4f8ace, type: 3}
+  - {fileID: 21300000, guid: 367dcc0803572c242ab7b9c51db17dc2, type: 3}
+  - {fileID: 21300000, guid: 2af181f71afb0b14aa34f42625252577, type: 3}
   - {fileID: 21300000, guid: f5c75bdc8549cc546b1324b447528e90, type: 3}
   - {fileID: 21300000, guid: 0fd0c75057e45ab4cb8d42e990a81ba5, type: 3}
+  cuttingBoardIngredientSprites:
+  - {fileID: 21300000, guid: ea65c59832b2b9841bae1dfed67759df, type: 3}
+  - {fileID: 21300000, guid: ff7f5c015e361d147ac5d3502db023d5, type: 3}
+  - {fileID: 21300000, guid: 8f9c38871eb625844b31e53c6dfe71d9, type: 3}
+  cuttingBoardIngredientImage: {fileID: 1375827166}
   perfectCutSprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   imperfectCutSprite: {fileID: 21300000, guid: ae46f0efce155cd43b9bfa102c80816f, type: 3}
   buttonOne:
@@ -11952,6 +11958,7 @@ MonoBehaviour:
   - 
   feedbackDuration: 0.4
   inputDelay: 0.25
+  simultaneousPressWindow: 10
   playerNum: 2
   knifePrefab: {fileID: 8612688571076671116, guid: b83fee962ce8e144ca45fd61aceabafb, type: 3}
 --- !u!1 &1175027551
@@ -22392,6 +22399,7 @@ MonoBehaviour:
   shrimpGunPrefab: {fileID: 9032743611845700120, guid: 2d0693ab007d68c46825c7aedb053fc3, type: 3}
   bamboomstickPrefab: {fileID: 8798964838175921750, guid: d5c1ab8924b634747a6954cb96a6ba40, type: 3}
   wc: {fileID: 669712069}
+  outputPos: {fileID: 1918862441}
 --- !u!1 &919132147983673158
 GameObject:
   m_ObjectHideFlags: 0
@@ -26057,6 +26065,8 @@ MonoBehaviour:
   player: {fileID: 6967845726028191412}
   followSpeed: 2
   deadZoneAngle: 5
+  zFollowDistance: 3
+  zReturnSpeed: 7
 --- !u!114 &3369244516205481809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26072,6 +26082,8 @@ MonoBehaviour:
   player: {fileID: 6967845725193574991}
   followSpeed: 2
   deadZoneAngle: 5
+  zFollowDistance: 3
+  zReturnSpeed: 7
 --- !u!4 &3387571708782916662
 Transform:
   m_ObjectHideFlags: 0
@@ -26335,19 +26347,24 @@ MonoBehaviour:
   - {fileID: 1212609153}
   - {fileID: 437468509}
   cuttingBoardButtonSprites:
-  - {fileID: 21300000, guid: 7a6706110cf2f5e408e33619f3ad976a, type: 3}
-  - {fileID: 21300000, guid: 9dbadf5b02fde3d4b90328df3959895e, type: 3}
-  - {fileID: 21300000, guid: 336ad1ea1bd86d141bc475a011449ba6, type: 3}
-  - {fileID: 21300000, guid: f9943784daac0d7488959aac9a7e7ab0, type: 3}
+  - {fileID: 21300000, guid: e72af77310a173c4bb7e87b4f62f11aa, type: 3}
+  - {fileID: 21300000, guid: 17c3f863333adad4a9b12ff4847e43a0, type: 3}
+  - {fileID: 21300000, guid: 4699c0fc31d34294c84f1526d912ea5d, type: 3}
+  - {fileID: 21300000, guid: 58ade23d3124d8542a4c936db5704fd2, type: 3}
   - {fileID: 21300000, guid: 7bb0b0d004cfef249ac9aeb762de6ee0, type: 3}
   - {fileID: 21300000, guid: e89131774baa68240b985092da5d4470, type: 3}
   cuttingBoardButtonHighlightSprites:
-  - {fileID: 21300000, guid: d8b97aa33264b4a4a8cca53300c40812, type: 3}
-  - {fileID: 21300000, guid: 35683257c5e1bbc41bf27fd5f9f79734, type: 3}
-  - {fileID: 21300000, guid: a6c65069d4b7c094587e1d81875c03b8, type: 3}
-  - {fileID: 21300000, guid: c013f0e371ac5c6478758317423faaed, type: 3}
+  - {fileID: 21300000, guid: 759ac16a86723e44cb2f0ba719bb9422, type: 3}
+  - {fileID: 21300000, guid: 391bf3ff3fb082940b50e430cb4f8ace, type: 3}
+  - {fileID: 21300000, guid: 367dcc0803572c242ab7b9c51db17dc2, type: 3}
+  - {fileID: 21300000, guid: 2af181f71afb0b14aa34f42625252577, type: 3}
   - {fileID: 21300000, guid: f5c75bdc8549cc546b1324b447528e90, type: 3}
   - {fileID: 21300000, guid: 0fd0c75057e45ab4cb8d42e990a81ba5, type: 3}
+  cuttingBoardIngredientSprites:
+  - {fileID: 21300000, guid: ea65c59832b2b9841bae1dfed67759df, type: 3}
+  - {fileID: 21300000, guid: ff7f5c015e361d147ac5d3502db023d5, type: 3}
+  - {fileID: 21300000, guid: 8f9c38871eb625844b31e53c6dfe71d9, type: 3}
+  cuttingBoardIngredientImage: {fileID: 85517279}
   perfectCutSprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   imperfectCutSprite: {fileID: 21300000, guid: ae46f0efce155cd43b9bfa102c80816f, type: 3}
   buttonOne:
@@ -26362,6 +26379,7 @@ MonoBehaviour:
   - 
   feedbackDuration: 0.4
   inputDelay: 0.25
+  simultaneousPressWindow: 10
   playerNum: 1
   knifePrefab: {fileID: 8612688571076671116, guid: b83fee962ce8e144ca45fd61aceabafb, type: 3}
 --- !u!4 &3480445519582312070
@@ -29997,6 +30015,7 @@ MonoBehaviour:
   speed: 5
   rotationSpeed: 5
   playerNum: 2
+  camPos: {fileID: 0}
 --- !u!114 &6188505324577199191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30012,6 +30031,7 @@ MonoBehaviour:
   speed: 5
   rotationSpeed: 5
   playerNum: 1
+  camPos: {fileID: 0}
 --- !u!33 &6211125431412400142
 MeshFilter:
   m_ObjectHideFlags: 0
