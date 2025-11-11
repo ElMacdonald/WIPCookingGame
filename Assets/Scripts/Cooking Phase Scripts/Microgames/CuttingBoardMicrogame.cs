@@ -197,7 +197,7 @@ public class CuttingBoardMicrogame : MonoBehaviour
         // This is your placeholder "always false" check for manual controller input
         foreach (string button in buttonNames)
         {
-            if (false) // keep this as-is so nothing happens yet
+            if (false) // keep this as is so nothing happens yet
             {
                 HandleInput(button);
                 break;

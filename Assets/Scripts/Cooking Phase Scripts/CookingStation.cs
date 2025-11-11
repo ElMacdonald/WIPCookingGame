@@ -79,8 +79,10 @@ public class CookingStation : MonoBehaviour
         }
 
         // Define the two valid recipes
-        string[] recipe1 = { "Cut Salmon", "Scrap Metal", "Cut Bamboo" };
-        string[] recipe2 = { "Cut Shrimp", "Scrap Metal", "Cut Bamboo" };
+        string[] recipe1 = { "Cut Salmon", "Scrap Metal", "Cut Bamboo" }; //Bamboomstick
+        string[] recipe2 = { "Cut Shrimp", "Scrap Metal", "Cut Bamboo" }; //Shrimp pistol TODO convert cut to boiled shrimp
+        string[] recipe3 = {};
+
 
         // Check for matches (ignoring order)
         bool matchRecipe1 = true;
