@@ -55,13 +55,13 @@ public class ThirdPersonCamera : MonoBehaviour
 
         if (playerNum == 1)
         {
-            xAxis = Input.GetAxis("LookX_P1");
-            yAxis = Input.GetAxis("LookY_P1");
+            xAxis = Input.GetAxis("LookX_P1") * Time.deltaTime;
+            yAxis = Input.GetAxis("LookY_P1") * Time.deltaTime;
         }
         else
         {
-            xAxis = Input.GetAxis("LookX_P2");
-            yAxis = Input.GetAxis("LookY_P2");
+            xAxis = Input.GetAxis("LookX_P2") * Time.deltaTime;
+            yAxis = Input.GetAxis("LookY_P2") * Time.deltaTime;
         }
 
         yaw += xAxis * mouseSensitivityX;

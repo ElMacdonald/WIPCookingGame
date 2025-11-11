@@ -13,7 +13,7 @@ public class AmmoCounter : MonoBehaviour
         tempWeaponGive = FindFirstObjectByType<TempWeaponGive>();
         Debug.Log("Trying to find weapon: " + tempWeaponGive.player2Dish + " " + playerNum);
         //GameObject.Find(tempWeaponGive.player2Dish + " " + playerNum).SetActive(true);
-        weapon = GameObject.Find(tempWeaponGive.player2Dish + " " + playerNum).GetComponent<Weapon>();
+        //weapon = GameObject.Find(tempWeaponGive.player2Dish + " " + playerNum).GetComponent<Weapon>();
     }
 
     // Sets the ammo counter text every frame
