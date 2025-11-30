@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ceiling 1
+  m_Name: garbage 1
   m_Shader: {fileID: 4800000, guid: 313fcf3aebc04cf4ab4f8c5f2850be7f, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -31,13 +31,13 @@ Material:
     m_Floats:
     - Step1: 1
     - _Gloss: 10
-    - _OutlineWidth: 0.066
+    - _OutlineWidth: 0.3
     - _RimPower: 2.2
     - _RimStep: 0
     - _RimStepSmooth: 0
-    - _ShadowStep: 0.559
+    - _ShadowStep: 0.64
     - _ShadowStepSmooth: 0
-    - _SpecularStep: 1
+    - _SpecularStep: 0.33
     - _SpecularStepSmooth: 0
     - _Step: 0.432
     - _Step1: 0.537
@@ -45,10 +45,10 @@ Material:
     - _Step3: 0.97
     - _Step4: 0.025
     m_Colors:
-    - _BaseColor: {r: 0.9811321, g: 0.9811321, b: 0.9811321, a: 1}
+    - _BaseColor: {r: 0.424999, g: 0.5566038, b: 0.25992346, a: 1}
     - _HighColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
-    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SpecularColor: {r: 0.1619409, g: 0.5471698, b: 0.05420078, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
