@@ -9,6 +9,7 @@ public class IngredientHolding : MonoBehaviour
     public GameObject[] followables;
 
 
+
     void Start()
     {
         makeFollowable("invisible spaghetti");
@@ -35,5 +36,10 @@ public class IngredientHolding : MonoBehaviour
         ingredientCurrentlyHeld = null;
         isHeld = false;
         makeFollowable("invisible spaghetti");
+    }
+
+    void Update()
+    {
+        ingredientName = ingredientCurrentlyHeld != null ? ingredientCurrentlyHeld.name : "";
     }
 }
