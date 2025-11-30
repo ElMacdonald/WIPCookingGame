@@ -47,6 +47,7 @@ public class IngredientBin : MonoBehaviour
             updateQuality();
             ih.ingredientCurrentlyHeld = new Ingredient(ingredientType.name, ingredientType.quality, ingredientType.ingredientPrefab);
             ih.isHeld = true;
+            ih.ingredientName = ingredientType.name;
             Debug.Log("Gave " + ingredientType.quality + " " + ingredientType.name + " to player");
             ih.makeFollowable(ingredientType.name);
             cdTimer = ingredientCooldown;
