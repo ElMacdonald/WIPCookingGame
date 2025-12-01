@@ -139,7 +139,7 @@ Material:
     m_Colors:
     - Color_9B881ED6: {r: 0.40094337, g: 0.7435868, b: 1, a: 1}
     - Color_BED8F987: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 1}
-    - Color_CA4EAD0D: {r: 1, g: 1, b: 1, a: 1}
+    - Color_CA4EAD0D: {r: 0.4292453, g: 0.6746179, b: 1, a: 1}
     - Color_E9CFA916: {r: 0.6556604, g: 0.9634122, b: 1, a: 0.078431375}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
