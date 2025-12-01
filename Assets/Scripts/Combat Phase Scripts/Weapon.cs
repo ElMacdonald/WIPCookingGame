@@ -58,7 +58,7 @@ public class Weapon : MonoBehaviour
     private void Update()
     {
         firerateTimer += Time.deltaTime;
-        InputManager();
+        //InputManager();
     }
 
     // -------------------
@@ -244,6 +244,27 @@ public class Weapon : MonoBehaviour
         {
             StartCoroutine(Reload());
             reloadInProgress = true;
+        }
+    }
+
+    public void TakeInput(string buttonName)
+    {
+        if (buttonName == "RT")
+        {
+            if (firerate < firerateTimer)
+            {
+                Fire();
+                firerateTimer = 0f;
+            }
+        }
+        else if (buttonName == "X")
+        {
+            if (!reloadInProgress)
+            {
+                reloadInProgress = true;
+                Debug.Log("Reloading started via InputHandler");
+                StartCoroutine(Reload());
+            }
         }
     }
 }

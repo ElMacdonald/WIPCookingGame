@@ -10,7 +10,9 @@ public class IngredientInteraction : MonoBehaviour
     public bool canCook;
     public bool canBook;
     public bool canCut;
+    public bool canDish;
     public bool cutting;
+    public bool canLeave;
 
     public int playerNum;
     private bool interactPressed;
@@ -38,8 +40,41 @@ public class IngredientInteraction : MonoBehaviour
     // If there are multiple bins in range, it will deposit it into the closest one
     void Update()
     {
-        if (interactPressed && (canInteract || canTrash || canCook || canCut))
+        if (interactPressed && (canInteract || canTrash || canCook || canCut || canDish || canLeave))
         {
+            if (canLeave)
+            {
+                if(gameObject.GetComponent<IngredientHolding>().ingredientCurrentlyHeld.quality == "Dish")
+                {
+                    //Gets first gameplay manager in scne
+                    GameplayManager gm = FindObjectOfType<GameplayManager>();
+                    if (playerNum == 1)
+                    {
+                        gm.SwitchToCombatPhase(1);
+                    }
+                    else
+                    {
+                        gm.SwitchToCombatPhase(2);
+                    }
+                }
+                return;
+            }
+            if (canDish)
+            {
+                GameObject station = GameObject.Find("Cooking Station P" + playerNum);
+                if (station != null)
+                {
+                    IngredientHolding ih = gameObject.GetComponent<IngredientHolding>();
+                    if (ih != null && ih.ingredientCurrentlyHeld == null)
+                    {
+                        CookingStation cs = station.GetComponent<CookingStation>();
+                        ih.ingredientCurrentlyHeld = new Ingredient(cs.cookingOutput.name.Replace("(Clone)", ""), "Dish", null);
+                        Destroy(cs.cookingOutput);
+                        canDish = false;
+                        return;
+                    }
+                }
+            }
             if (canCut && !cutting && gameObject.GetComponent<IngredientHolding>().ingredientCurrentlyHeld != null)
             {
                 cutting = true;
@@ -87,7 +122,7 @@ public class IngredientInteraction : MonoBehaviour
                     if (cs != null)
                     {
                         IngredientHolding ih = gameObject.GetComponent<IngredientHolding>();
-                        if (ih != null && ih.ingredientCurrentlyHeld != null)
+                        if (ih != null && ih.ingredientCurrentlyHeld != null && ih.ingredientCurrentlyHeld.quality != "Dish")
                         {
                             cs.AddIngredient(ih.ingredientCurrentlyHeld);
                             ih.trashIngredient();
@@ -166,6 +201,14 @@ public class IngredientInteraction : MonoBehaviour
         {
             canBook = true;
         }
+        if(other.gameObject.tag == "Dish")
+        {
+            canDish = true;
+        }
+        if(other.gameObject.tag == "Door")
+        {
+            canLeave = true;
+        }
     }
 
     // Used whenever player leaves the trigger area of bins and stations
@@ -198,6 +241,14 @@ public class IngredientInteraction : MonoBehaviour
         if (other.gameObject.tag == "Recipe Book")
         {
             canBook = false;
+        }
+        if(other.gameObject.tag == "Dish")
+        {
+            canDish = false;
+        }
+        if(other.gameObject.tag == "Door")
+        {
+            canLeave = false;
         }
     }
 }

@@ -45,9 +45,22 @@ public class ThirdPersonMovement : MonoBehaviour
         HandleMovement();
     }
 
+    public void MovePlayer(float horizontalInput, float verticalInput)
+    {
+        inputX = horizontalInput;
+        inputZ = verticalInput;
+    }
+
+    public void TakeInput(bool jumpInput)
+    {
+        jumping = jumpInput;
+    }
+
+
     private void HandleMovement()
     {
         //Read input (old Input Manager)
+        /*
         if (playerNum == 1)
         {
             inputX = Input.GetAxis("Horizontal_P1");
@@ -60,6 +73,7 @@ public class ThirdPersonMovement : MonoBehaviour
             inputZ = -Input.GetAxis("Vertical_P2");
             jumping = Input.GetButtonDown("Jump_P2");
         }
+        */
         
         Vector3 inputDir = new Vector3(inputX, 0f, inputZ);
         float inputMagnitude = Mathf.Clamp01(inputDir.magnitude);
@@ -120,5 +134,6 @@ public class ThirdPersonMovement : MonoBehaviour
         Vector3 horizontalVelocity = moveDir * currentSpeed;
         Vector3 velocity = horizontalVelocity + Vector3.up * verticalVelocity;
         cc.Move(velocity * Time.deltaTime);
+        jumping = false;
     }
 }

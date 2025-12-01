@@ -6,6 +6,7 @@ public class CookingSceneInventory : MonoBehaviour
     public Image ingredientImage;
     public IngredientHolding ih;
     public Sprite[] ingredientSprites;
+    public GameObject cutSprite;
     public int playerNum;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,31 +20,40 @@ public class CookingSceneInventory : MonoBehaviour
         {
             ih = GameObject.Find("Player2").GetComponent<IngredientHolding>();
         }
+
+        cutSprite = transform.parent.Find("Cut Sprite").gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        switch(ih.ingredientName)
+        string name = ih.ingredientName.ToLower();
+
+        ingredientImage.color = new Color(1, 1, 1, 1);
+        if (name.Contains("shrimp pistol"))
+            ingredientImage.sprite = ingredientSprites[5];
+        else if (name.Contains("scrap metal"))
+            ingredientImage.sprite = ingredientSprites[1];
+        else if (name.Contains("salmon"))
+            ingredientImage.sprite = ingredientSprites[2];
+        else if (name.Contains("bamboomstick"))
+            ingredientImage.sprite = ingredientSprites[6];
+        else if (name.Contains("onion"))
+            ingredientImage.sprite = ingredientSprites[4];
+        else if (name.Contains("shrimp"))
+            ingredientImage.sprite = ingredientSprites[0];
+        else if (name.Contains("bamboo"))
+            ingredientImage.sprite = ingredientSprites[3];
+        else //makes it transparent
+            ingredientImage.color = new Color(1, 1, 1, 0);
+
+        if(name.Contains("cut"))
         {
-            case "Shrimp":
-                ingredientImage.sprite = ingredientSprites[0];
-                break;
-            case "Scrap Metal":
-                ingredientImage.sprite = ingredientSprites[1];
-                break;
-            case "Salmon":
-                ingredientImage.sprite = ingredientSprites[2];
-                break;
-            case "Bamboo":
-                ingredientImage.sprite = ingredientSprites[3];
-                break;
-            case "Onion":
-                ingredientImage.sprite = ingredientSprites[4];
-                break;
-            default:
-                ingredientImage.sprite = null;
-                break;
+            cutSprite.SetActive(true);
+        }else
+        {
+            cutSprite.SetActive(false);
         }
     }
+
 }

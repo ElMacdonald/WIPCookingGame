@@ -47,12 +47,18 @@ public class ThirdPersonCamera : MonoBehaviour
         pitch = angles.x;
     }
 
+    public void MoveCamera(float xInput, float yInput)
+    {
+        xAxis = xInput;
+        yAxis = yInput;
+    }
+
     void LateUpdate()
     {
         if (target == null) return;
 
         //Mouse input using Unity's old input manager
-
+        /*
         if (playerNum == 1)
         {
             xAxis = Input.GetAxis("LookX_P1") * Time.deltaTime;
@@ -63,7 +69,7 @@ public class ThirdPersonCamera : MonoBehaviour
             xAxis = Input.GetAxis("LookX_P2") * Time.deltaTime;
             yAxis = Input.GetAxis("LookY_P2") * Time.deltaTime;
         }
-
+        */
         yaw += xAxis * mouseSensitivityX;
         float mouseY = yAxis * mouseSensitivityY;
         pitch += (invertY ? mouseY : -mouseY);

@@ -13,6 +13,8 @@ public class TopDownMove : MonoBehaviour
     private PlayerControls input;
     public CameraPositioner camPos;
 
+    public bool canMove = true;
+
     void Start()
     {
         input = new PlayerControls();
@@ -27,18 +29,20 @@ public class TopDownMove : MonoBehaviour
 
     void FixedUpdate()
     {
-
-        //creates movement vector
-        move = new Vector3(horizontal, 0, vertical).normalized;
-
-        //applies vector
-        transform.position += speed * Time.deltaTime * move;
-
-        //rotates player to face move direction
-        if (move != Vector3.zero)
+        if (canMove)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(move);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            //creates movement vector
+            move = new Vector3(horizontal, 0, vertical).normalized;
+
+            //applies vector
+            transform.position += speed * Time.deltaTime * move;
+
+            //rotates player to face move direction
+            if (move != Vector3.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(move);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            }
         }
     }
 

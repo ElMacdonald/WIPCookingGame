@@ -92,6 +92,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bamboomstick
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e636b45ff544c5f4a80238fc2a99c655, type: 3}
+      propertyPath: m_TagString
+      value: Dish
+      objectReference: {fileID: 0}
     - target: {fileID: 7276624544978368812, guid: e636b45ff544c5f4a80238fc2a99c655, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -107,5 +111,34 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e636b45ff544c5f4a80238fc2a99c655, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3132610779072711740}
   m_SourcePrefab: {fileID: 100100000, guid: e636b45ff544c5f4a80238fc2a99c655, type: 3}
+--- !u!1 &8798964838175921750 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e636b45ff544c5f4a80238fc2a99c655, type: 3}
+  m_PrefabInstance: {fileID: 8565101259247184647}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &3132610779072711740
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8798964838175921750}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 10.27
+  m_Center: {x: 0, y: 0, z: 0}

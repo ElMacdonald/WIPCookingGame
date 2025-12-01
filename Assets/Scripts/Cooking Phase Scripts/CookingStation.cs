@@ -22,6 +22,7 @@ public class CookingStation : MonoBehaviour
     public WinCondition wc;
 
     public Transform outputPos;
+    public GameObject cookingOutput;
 
 
 
@@ -109,16 +110,16 @@ public class CookingStation : MonoBehaviour
         if (matchRecipe1)
         {
             Debug.Log("Correct Recipe: Bamboomstick!");
-            Instantiate(bamboomstickPrefab, outputPos.position, Quaternion.identity * Quaternion.Euler(0, 90, 45));
-            wc.declareWinner(ie.playerNum, "Bamboomstick");
-            GameObject.Find("Player"+ie.playerNum).GetComponent<TopDownMove>().enabled = false;
+            cookingOutput = Instantiate(bamboomstickPrefab, outputPos.position, Quaternion.identity * Quaternion.Euler(0, 90, 45));
+            //wc.declareWinner(ie.playerNum, "Bamboomstick");
+            //GameObject.Find("Player"+ie.playerNum).GetComponent<TopDownMove>().enabled = false;
         }
         else if (matchRecipe2)
         {
             Debug.Log("Correct Recipe: Shrimp Pistol!");
-            Instantiate(shrimpGunPrefab, outputPos.position, Quaternion.identity * Quaternion.Euler(0, 90, 45));
-            wc.declareWinner(ie.playerNum, "Shrimp pistol");
-            GameObject.Find("Player"+ie.playerNum).GetComponent<TopDownMove>().enabled = false;
+            cookingOutput = Instantiate(shrimpGunPrefab, outputPos.position, Quaternion.identity * Quaternion.Euler(0, 90, 45));
+            //wc.declareWinner(ie.playerNum, "Shrimp pistol");
+            //GameObject.Find("Player"+ie.playerNum).GetComponent<TopDownMove>().enabled = false;
         }
         else
         {

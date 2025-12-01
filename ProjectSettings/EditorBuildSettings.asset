@@ -4,6 +4,9 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/kitchen scene.unity
+    guid: da06147be800600439294e76091777cb
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

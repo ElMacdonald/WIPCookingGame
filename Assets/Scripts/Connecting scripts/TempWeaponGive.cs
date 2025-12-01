@@ -28,7 +28,6 @@ public class TempWeaponGive : MonoBehaviour
         else
         {
             Debug.LogWarning("Player 1 (Soosh new) not found!");
-            return;
         }
             
 
@@ -37,15 +36,20 @@ public class TempWeaponGive : MonoBehaviour
         else
         {
             Debug.LogWarning("Player 2 (Stew new) not found!");
-            return;
         }
             
     }
 
     private void ActivateWeaponForPlayer(GameObject playerObj, string dishName, int playerNum)
     {
-        amcountP1 = GameObject.Find("AMMO NUMS P1").GetComponent<AmmoCounter>();
-        amcountP2 = GameObject.Find("AMMO NUMS P2").GetComponent<AmmoCounter>();
+        GameObject amcountP1Obj = GameObject.Find("AMMO NUMS P1");
+        GameObject amcountP2Obj = GameObject.Find("AMMO NUMS P2");
+        if (amcountP1Obj != null)
+            amcountP1 = amcountP1Obj.GetComponent<AmmoCounter>();
+        if (amcountP2Obj != null)
+            amcountP2 = amcountP2Obj.GetComponent<AmmoCounter>();
+
+    
 
         bool found = false;
         foreach (Transform child in playerObj.transform.Find("Weapons P" + playerNum).transform)
@@ -59,16 +63,18 @@ public class TempWeaponGive : MonoBehaviour
                 if(playerNum == 1)
                 {
                     amcountP1.weapon = child.GetComponent<Weapon>();
+                    child.GetComponent<Weapon>().reloadInProgress = false;
                 }
                 else
                 {
                     amcountP2.weapon = child.GetComponent<Weapon>();
+                    child.GetComponent<Weapon>().reloadInProgress = false;
                 }
                 if (dishName == "Shrimp pistol")
                 {
                     GameObject.Find("P" + playerNum + " Weapon Img").GetComponent<Image>().sprite = shrimpSprite;
                 }
-                else if (dishName == "Bamboomstick")
+                else if (dishName == "bamboomstick")
                 {
                     GameObject.Find("P" + playerNum + " Weapon Img").GetComponent<Image>().sprite = bamboomSprite;
                 }

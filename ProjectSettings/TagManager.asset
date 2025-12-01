@@ -9,6 +9,8 @@ TagManager:
   - Cooking Station
   - Recipe Book
   - Cutting Board
+  - Dish
+  - Door
   layers:
   - Default
   - TransparentFX

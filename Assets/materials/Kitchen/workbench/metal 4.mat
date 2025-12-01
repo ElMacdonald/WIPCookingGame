@@ -25,7 +25,7 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _OutlineWidth: 0.0015
+    - _OutlineWidth: 0.011
     - _RimStep: 0
     - _RimStepSmooth: 0
     m_Colors:

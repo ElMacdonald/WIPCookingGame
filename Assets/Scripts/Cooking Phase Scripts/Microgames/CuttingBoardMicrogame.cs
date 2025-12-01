@@ -73,6 +73,12 @@ public class CuttingBoardMicrogame : MonoBehaviour
                             Debug.Log("Ingredient not cuttable!");
                             break;
                     }
+                    //disable player movement while in minigame
+                    TopDownMove tdm = player.GetComponent<TopDownMove>();
+                    if (tdm != null)
+                    {
+                        tdm.canMove = false;
+                    }
                 }
             }
         }
@@ -99,7 +105,14 @@ public class CuttingBoardMicrogame : MonoBehaviour
                             Debug.Log("Ingredient not cuttable!");
                             break;
                     }
+                    //disable player movement while in minigame
+                    TopDownMove tdm = player.GetComponent<TopDownMove>();
+                    if (tdm != null)
+                    {
+                        tdm.canMove = false;
+                    }
                 }
+                
             }
         }
 
@@ -306,6 +319,9 @@ public class CuttingBoardMicrogame : MonoBehaviour
         }
 
         inputLocked = false;
+        //reenable player input
+        
+
     }
 
     // Function that takes player number and button name, returns if that button was pressed this frame
@@ -358,7 +374,14 @@ public class CuttingBoardMicrogame : MonoBehaviour
             }
             if (ii != null)
                 ii.cutting = false;
+
+            TopDownMove tdm = player.GetComponent<TopDownMove>();
+            if (tdm != null)
+            {
+                tdm.canMove = true;
+            }
         }
+
     }
 
 
@@ -381,6 +404,11 @@ public class CuttingBoardMicrogame : MonoBehaviour
             }
             if (ii != null)
                 ii.cutting = false;
+            TopDownMove tdm = player.GetComponent<TopDownMove>();
+            if (tdm != null)
+            {
+                tdm.canMove = true;
+            }
         }
     }
 }
