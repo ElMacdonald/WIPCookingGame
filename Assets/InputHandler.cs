@@ -32,7 +32,7 @@ public class InputHandler : MonoBehaviour
         // Determine which player this is 
         playerNum = pi.playerIndex + 1;
 
-        // Find associated objects in scene (based on consistent naming)
+        // Finds objects based on name
         tdm = GameObject.Find($"Player{playerNum}").GetComponent<TopDownMove>();
         cs = GameObject.Find($"Cooking Station P{playerNum}").GetComponent<CookingStation>();
         cbm = GameObject.Find($"Cutting Board P{playerNum}").GetComponent<CuttingBoardMicrogame>();
@@ -104,7 +104,7 @@ public class InputHandler : MonoBehaviour
         // If pressing button near cooking station performs interaction:
         ii.takeInput(buttonName);
         // If pressing button during combat phase, send to ThirdPersonMovement
-        tpm.TakeInput(buttonName == "A");
+        tpm.TakeInput(buttonName);
         weap.TakeInput(buttonName);
         bs.TakeInput(buttonName);
     }

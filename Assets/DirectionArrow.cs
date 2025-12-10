@@ -23,15 +23,15 @@ public class DirectionArrow : MonoBehaviour
         arrowModel.SetActive(distance > hideRange);
         if (!arrowModel.activeSelf) return;
 
-        // ---- GET DIRECTION FROM PLAYER TO TARGET ----
+        // Direction from player to target
         Vector3 dir = (target.position - player.position).normalized;
 
-        // ---- POSITION AROUND PLAYER BASED ON DIRECTION ----
+        // positions around player
         Vector3 newPos = player.position + dir * radius;
         newPos.y = player.position.y + height;
         transform.position = newPos;
 
-        // ---- ROTATE ARROW TO FACE THE TARGET ----
+        // orbit
         dir.y = 0;
         transform.rotation = Quaternion.LookRotation(dir);
         
